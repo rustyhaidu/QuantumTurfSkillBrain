@@ -3,36 +3,49 @@ package org.quantumturf;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class SocialButton {
 
     @Test
-    public static void  InstagramSocialButton(){
+    public static void  instagramSocialButton(){
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.quantumturf.com");
-        driver.findElement(By.xpath("/html/body/div/div[2]/footer/div/div/div/div/div[1]/div/div[1]/div[2]/div/div/div/div/a[3]")).click();
+        driver.findElement(By.xpath("//*[@id=\"hs_cos_wrapper_footer-module-2\"]/div/a[3]")).click();
+
+        String expectedURL = "https://www.instagram.com/quantumturf/";
+        String originalURL = driver.getCurrentUrl();
+        Assert.assertEquals(originalURL, expectedURL);
 
     }
     @Test
-    public static void  FacebookSocialButton(){
+    public static void  facebookSocialButton(){
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.quantumturf.com");
-        driver.findElement(By.xpath("/html/body/div/div[2]/footer/div/div/div/div/div[1]/div/div[1]/div[2]/div/div/div/div/a[1]")).click();
+        driver.findElement(By.xpath("//*[@id=\"hs_cos_wrapper_footer-module-2\"]/div/a[1]")).click();
+
+        String expectedURL = "https://www.facebook.com/quantumturf";
+        String originalURL = driver.getCurrentUrl();
+        Assert.assertEquals(originalURL, expectedURL);
 
     }
 
     @Test
-    public static void  LinkedinSocialButton(){
+    public static void  linkedinSocialButton(){
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://www.quantumturf.com");
-        driver.findElement(By.xpath("/html/body/div/div[2]/footer/div/div/div/div/div[1]/div/div[1]/div[2]/div/div/div/div/a[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"hs_cos_wrapper_footer-module-2\"]/div/a[2]")).click();
+
+        String expectedURL = "https://www.linkedin.com/company/quantumturf/";
+        String originalURL = driver.getCurrentUrl();
+        Assert.assertEquals(originalURL, expectedURL);
 
     }
 
