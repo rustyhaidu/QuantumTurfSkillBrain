@@ -1,11 +1,10 @@
 package org.quantumturf;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.quantumturf.utils.Constants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,11 +14,6 @@ public class CitireParagraf extends BaseTest{
 
     @Test
     public void extragereparagraf() {
-
-        driver.get("https://quantumturf.com/?trk=public_post_main-feed-card-text");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         /*WebElement makesButton = driver.findElement(By.cssSelector("#hs_cos_wrapper_widget_1739158895626 > " +
                 "section > details:nth-child(1) > summary"));*/
         // WebElement makesButton = driver.findElement(By.cssSelector("details:nth-child(1)"));
@@ -43,7 +37,5 @@ public class CitireParagraf extends BaseTest{
         System.out.println("Textul este :" + textExtras);
 
         Assert.assertEquals(textExtras, expectedText, "Verificam ca textele coincid");
-
-
     }
 }
