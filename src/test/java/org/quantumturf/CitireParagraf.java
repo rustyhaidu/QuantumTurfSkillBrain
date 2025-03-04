@@ -11,13 +11,11 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class CitireParagraf {
+public class CitireParagraf extends BaseTest{
 
     @Test
     public void extragereparagraf() {
 
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
         driver.get("https://quantumturf.com/?trk=public_post_main-feed-card-text");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -45,5 +43,7 @@ public class CitireParagraf {
         System.out.println("Textul este :" + textExtras);
 
         Assert.assertEquals(textExtras, expectedText, "Verificam ca textele coincid");
+
+
     }
 }
