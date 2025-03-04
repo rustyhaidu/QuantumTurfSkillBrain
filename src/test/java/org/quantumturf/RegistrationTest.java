@@ -2,7 +2,9 @@ package org.quantumturf;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.quantumturf.pageobjects.HomePage;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +15,18 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 
-public class Registration {
+public class RegistrationTest extends BaseTest {
+    HomePage homePage;
+
+    @BeforeMethod
+    public void setUpPage() {
+        homePage = new HomePage(driver);
+    }
 
     @Test
-    public void registerUser() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.quantumturf.com");
-        driver.findElement(By.cssSelector(".header a[href*='signup'")).click();
+    public void registerUser() {
+        homePage.clickOnRegisterButton();
+
         driver.findElement(By.xpath("//div[.='First Name']/following-sibling::div/input")).sendKeys("Alina");
         driver.findElement(By.xpath("//div[.='Last Name']/following-sibling::div/input")).sendKeys("Mocanu");
         driver.findElement(By.xpath("//div[.='Email']/following-sibling::div/input")).sendKeys("alinamarie0426@gmail.com");
