@@ -27,4 +27,15 @@ public class LoginPage extends HomePage {
         driver.findElement(continueButtonSelector).click();
     }
 
+    public void performLogin(String email, String password) {
+        clickOnSignInButton();
+        fillEmailField(email);
+        fillPasswordField(password);
+        clickOnContinue();
+    }
+
+    public void performLogin() {
+        performLogin("rustyhaidu@gmail.com", "SkillBrain06@");
+    }
+
 }
