@@ -1,7 +1,8 @@
-package org.quantumturf;
+package org.quantumturf.authorization;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +21,7 @@ public class RegistrationTest extends BaseTest {
 
     @BeforeMethod
     public void setUpPage() {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver,wait);
     }
 
     @Test
