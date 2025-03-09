@@ -1,10 +1,13 @@
 package org.quantumturf.pageobjects.mainpage;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.HomePage;
+
 
 public class MainPage extends HomePage {
 
@@ -62,4 +65,20 @@ public class MainPage extends HomePage {
     public void clickOnAddMemberButton() {
         driver.findElement(addMemberButton).click();
     }
+
+    public boolean isMemberAddedSuccessfully() {
+        // Căutăm mesajul de succes, presupunând că acesta are un ID sau un selector specific
+        driver.findElement(By.id("Membru adăugat cu succes!"));
+        return false;
+    }
+
+    public boolean isErrorMessageDisplayed(String s) {
+        // Căutăm mesajul de eroare, presupunând că acesta are un ID sau un selector specific
+        WebElement errorElement = driver.findElement(By.id("error-message"));
+        return false;
+    }
 }
+
+
+
+
