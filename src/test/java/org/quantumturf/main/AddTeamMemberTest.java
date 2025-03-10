@@ -58,7 +58,6 @@ public class AddTeamMemberTest extends BaseTest {
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Mesajul de eroare nu a aparut sau nu este corect.");
     }
 
-
 }
 
 
