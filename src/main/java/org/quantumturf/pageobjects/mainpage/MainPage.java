@@ -14,6 +14,7 @@ public class MainPage extends HomePage {
     public final By logoSelector = By.cssSelector("img[src*='quantum-turf'");
     public final By profileDropDownMenu = By.cssSelector("img[src*='down_icon']");
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
+    public final By logOutOptionMenu = By.xpath("//div[.='Logout']");
     public final By addTeamMemberButton = By.tagName("button");
     public final By addFirstName = By.xpath("//div[.='First Name']/../following-sibling::div/input");
     public final By addLastName = By.xpath("//div[.='Last Name']/../following-sibling::div/input");
@@ -32,6 +33,10 @@ public class MainPage extends HomePage {
 
     public void clickOnProfileDropDownMenu() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(profileDropDownMenu)).click();
+    }
+
+    public void clickOnLogOutOptionMenu() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logOutOptionMenu)).click();
     }
 
     public void clickOnMyTeamOptionMenu() {
@@ -68,7 +73,7 @@ public class MainPage extends HomePage {
 
     public WebElement getAddTeamMemberButton() {
         return driver.findElement(By.id("add-member-button"));
-        
+
     }
 
     public WebElement getErrorMessageElement() {
