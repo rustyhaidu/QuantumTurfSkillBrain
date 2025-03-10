@@ -66,18 +66,20 @@ public class MainPage extends HomePage {
         driver.findElement(addMemberButton).click();
     }
 
-    public boolean isMemberAddedSuccessfully() {
-        // Căutăm mesajul de succes, presupunând că acesta are un ID sau un selector specific
-        driver.findElement(By.id("Membru adăugat cu succes!"));
-        return false;
+    public WebElement getAddTeamMemberButton() {
+        return driver.findElement(By.id("add-member-button"));
+        
     }
 
-    public boolean isErrorMessageDisplayed(String s) {
-        // Căutăm mesajul de eroare, presupunând că acesta are un ID sau un selector specific
-        WebElement errorElement = driver.findElement(By.id("error-message"));
-        return false;
+    public WebElement getErrorMessageElement() {
+        return driver.findElement(By.id("error-message")); // Exemplu cu ID
+    }
+
+    public String getErrorMessage() {
+        return getErrorMessageElement().getText(); // Extrage textul de eroare
     }
 }
+
 
 
 
