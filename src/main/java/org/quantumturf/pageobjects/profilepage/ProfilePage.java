@@ -11,6 +11,9 @@ import org.quantumturf.pageobjects.mainpage.MainPage;
 public class ProfilePage extends MainPage {
 
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
+    public final By myProfileOptionMenu = By.xpath("//div[.='My Profile'][@class='dwn-navbar-option']");
+    public final By editButton = By.cssSelector("button.green-button-outlined");
+    public final By zipCodeInput = By.xpath("//div[.='Zip Code']/../following-sibling::div/input");
     public final By addTeamMemberButton = By.tagName("button");
     public final By addFirstName = By.xpath("//div[.='First Name']/../following-sibling::div/input");
     public final By addLastName = By.xpath("//div[.='Last Name']/../following-sibling::div/input");
@@ -62,4 +65,19 @@ public class ProfilePage extends MainPage {
     public void clickOnOperatorTab(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(operatorTab)).click();
     }
+
+    public void clickOnMyProfileOptionMenu(){
+        driver.findElement(myProfileOptionMenu).click();
+    }
+    public void editButton(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editButton)).click();
+    }
+    public void incrementZipCode(){
+      WebElement zipCodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeInput));
+      String oldZip = zipCodeElement.getText();
+      int newZip = Integer.parseInt(oldZip);
+      newZip ++;
+      zipCodeElement.sendKeys();
+    }
 }
+
