@@ -74,10 +74,10 @@ public class ProfilePage extends MainPage {
     }
     public void incrementZipCode(){
       WebElement zipCodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeInput));
-      String oldZip = zipCodeElement.getText();
+      String oldZip = zipCodeElement.getDomAttribute("value");
       int newZip = Integer.parseInt(oldZip);
       newZip ++;
-      zipCodeElement.sendKeys();
+      zipCodeElement.sendKeys(String.valueOf(newZip));
     }
 }
 
