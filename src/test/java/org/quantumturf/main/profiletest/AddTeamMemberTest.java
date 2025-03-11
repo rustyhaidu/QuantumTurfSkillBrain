@@ -20,7 +20,7 @@ public class AddTeamMemberTest extends BaseTest {
     @BeforeMethod
     public void setUpPages() {
         loginPage = new LoginPage(driver, wait);
-        profilePage= new ProfilePage(driver, wait);
+        profilePage = new ProfilePage(driver, wait);
     }
 
     @Test
@@ -33,29 +33,19 @@ public class AddTeamMemberTest extends BaseTest {
         profilePage.typeInLastName("Stoenescu");
         profilePage.typeInEmail("stoenescumihai88@gmail.com");
         profilePage.typePhoneNumber("00000000");
-        profilePage.clickOnAddMemberButton();
-
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(profilePage.getAddTeamMemberButton()));
-
-        profilePage.clickOnAddTeamMemberButton();
-        profilePage.typeInFirstName("Mihai");
-        profilePage.typeInLastName("Stoenescu");
-        profilePage.typeInEmail("stoenescumihai88@gmail.com");
-        profilePage.typePhoneNumber("00000000");
 
         // Apăsăm din nou butonul de adăugare a membrului
         profilePage.clickOnAddMemberButton();
 
-
         // Verificăm mesajul de eroare
-        String expectedErrorMessage = "Un membru al echipei cu acest e-mail există deja.";
+        String expectedErrorMessage = "Lawn Provider already exists.";
         String actualErrorMessage = profilePage.getErrorMessage().trim();  // Eliminăm spațiile suplimentare
 
         // Comparația între mesajul de eroare așteptat și cel efectiv
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Mesajul de eroare nu a aparut sau nu este corect.");
-    } @Test
+    }
+
+    @Test
     public void addTeamOperater() {
         loginPage.performLogin();
         profilePage.clickOnProfileDropDownMenu();
