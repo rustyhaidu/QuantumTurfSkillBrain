@@ -42,7 +42,7 @@ public class AddTeamMemberTest extends BaseTest {
         String actualErrorMessage = profilePage.getErrorMessage().trim();  // Eliminăm spațiile suplimentare
 
         // Comparația între mesajul de eroare așteptat și cel efectiv
-        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Mesajul de eroare nu a aparut sau nu este corect.");
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Verifica mesajul de eroare aparut.");
     }
 
     @Test
