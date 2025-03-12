@@ -9,29 +9,24 @@ import org.testng.annotations.Test;
 
 public class LogoutTest extends BaseTest {
 
-        MainPage mainPage;
-        LoginPage loginPage;
+    MainPage mainPage;
+    LoginPage loginPage;
 
-        @BeforeMethod
-        public void setUpPages() {
-            loginPage = new LoginPage(driver, wait);
-            mainPage = new MainPage(driver, wait);
-        }
-
-        @Test
-        public void successfulLoginAndLogout() {
-            loginPage.clickOnSignInButton();
-            String LoginURL = driver.getCurrentUrl();
-            loginPage.fillEmailField("rustyhaidu@gmail.com");
-            loginPage.fillPasswordField("SkillBrain06@");
-            loginPage.clickOnContinue();
-            mainPage.clickOnProfileDropDownMenu();
-            mainPage.clickOnLogOutOptionMenu();
-            Assert.assertEquals(driver.getCurrentUrl(),LoginURL);
-        }
-
-
+    @BeforeMethod
+    public void setUpPages() {
+        loginPage = new LoginPage(driver, wait);
+        mainPage = new MainPage(driver, wait);
     }
 
+    @Test
 
-
+    public void successfulLoginAndLogout() {
+        loginPage.clickOnSignInButton();
+        loginPage.fillEmailField("rustyhaidu@gmail.com");
+        loginPage.fillPasswordField("SkillBrain06@");
+        loginPage.clickOnContinue();
+        mainPage.clickOnProfileDropDownMenu();
+        mainPage.clickOnLogOutOptionMenu();
+        Assert.assertEquals(driver.getCurrentUrl(), loginPage.loginURL);
+    }
+}
