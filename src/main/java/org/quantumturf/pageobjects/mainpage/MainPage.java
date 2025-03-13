@@ -1,7 +1,6 @@
 package org.quantumturf.pageobjects.mainpage;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,7 +12,8 @@ public class MainPage extends HomePage {
 
     public final By logoSelector = By.cssSelector("img[src*='quantum-turf'");
     public final By profileDropDownMenu = By.cssSelector("img[src*='down_icon']");
-    public final By erorrMessage =By.cssSelector(".notification span");
+    public final By notificationMessage = By.cssSelector(".notification span");
+
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -28,8 +28,8 @@ public class MainPage extends HomePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(profileDropDownMenu)).click();
     }
 
-    public String getErrorMessage(){
-       WebElement errorElement =wait.until(ExpectedConditions.visibilityOfElementLocated(erorrMessage));
+    public String getNotificationMessage() {
+        WebElement errorElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
         return errorElement.getText();
     }
 }

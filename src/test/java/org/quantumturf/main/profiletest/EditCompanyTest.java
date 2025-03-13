@@ -4,6 +4,7 @@ import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.profilepage.EditCompanyPage;
 import org.quantumturf.pageobjects.profilepage.ProfilePage;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,7 +24,11 @@ public class EditCompanyTest extends BaseTest {
         editCompanyPage.clickOnProfileDropDownMenu();
         editCompanyPage.clickOnMyProfileOptionMenu();
         editCompanyPage.editButton();
-        editCompanyPage.incrementZipCode();
+        String newZipCode = editCompanyPage.incrementZipCode();
+        Assert.assertEquals(editCompanyPage.getZipCode(),newZipCode );
+        editCompanyPage.clickButtonForSave();
+        Assert.assertEquals(editCompanyPage.getNotificationMessage(),"Company updated");
+
     }
 
 }

@@ -1,16 +1,11 @@
 package org.quantumturf.main.profiletest;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
-import org.quantumturf.pageobjects.mainpage.MainPage;
 import org.quantumturf.pageobjects.profilepage.ProfilePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 public class AddTeamMemberTest extends BaseTest {
 
@@ -39,7 +34,7 @@ public class AddTeamMemberTest extends BaseTest {
 
         // Verificăm mesajul de eroare
         String expectedErrorMessage = "Lawn Provider already exists.";
-        String actualErrorMessage = profilePage.getErrorMessage().trim();  // Eliminăm spațiile suplimentare
+        String actualErrorMessage = profilePage.getNotificationMessage().trim();  // Eliminăm spațiile suplimentare
 
         // Comparația între mesajul de eroare așteptat și cel efectiv
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Verifica mesajul de eroare aparut.");
@@ -61,7 +56,7 @@ public class AddTeamMemberTest extends BaseTest {
 
         // Verificăm mesajul de eroare
         String expectedErrorMessage = "Lawn Provider already exists.";
-        String actualErrorMessage = profilePage.getErrorMessage().trim();  // Eliminăm spațiile suplimentare
+        String actualErrorMessage = profilePage.getNotificationMessage().trim();  // Eliminăm spațiile suplimentare
 
         // Comparația între mesajul de eroare așteptat și cel efectiv
         Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Mesajul de eroare nu a aparut sau nu este corect.");
