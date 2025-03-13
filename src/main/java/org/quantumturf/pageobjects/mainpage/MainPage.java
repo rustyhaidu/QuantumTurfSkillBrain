@@ -82,8 +82,6 @@ public class MainPage extends HomePage {
     }
 
     public String getErrorMessage() {
-        return getErrorMessageElement().getText(); // Extrage textul de eroare
-    public String getErrorMessage(){
        WebElement errorElement =wait.until(ExpectedConditions.visibilityOfElementLocated(erorrMessage));
         return errorElement.getText();
     }
