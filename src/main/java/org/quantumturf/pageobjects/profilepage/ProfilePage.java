@@ -1,43 +1,26 @@
-package org.quantumturf.pageobjects.mainpage;
+package org.quantumturf.pageobjects.profilepage;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.HomePage;
+import org.quantumturf.pageobjects.mainpage.MainPage;
 
+public class ProfilePage extends MainPage {
 
-public class MainPage extends HomePage {
-
-    public final By logoSelector = By.cssSelector("img[src*='quantum-turf'");
-    public final By profileDropDownMenu = By.cssSelector("img[src*='down_icon']");
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
-    public final By logOutOptionMenu = By.xpath("//div[.='Logout']");
     public final By addTeamMemberButton = By.tagName("button");
     public final By addFirstName = By.xpath("//div[.='First Name']/../following-sibling::div/input");
     public final By addLastName = By.xpath("//div[.='Last Name']/../following-sibling::div/input");
     public final By addEmail = By.xpath("//div[.='Email']/../following-sibling::div/input");
     public final By addPhoneNumber = By.xpath("//div[.='Phone Number']/../following-sibling::div/input");
     public final By addMemberButton = By.cssSelector(".drawer .green-button");
-    public final By erorrMessage =By.cssSelector(".notification span");
+    public final By operatorTab = By.xpath("//div[.='Operator']");
 
-    public MainPage(WebDriver driver, WebDriverWait wait) {
+    public ProfilePage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
-    }
-
-    public boolean isLogoDisplayed() {
-
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(logoSelector)).isDisplayed();
-    }
-
-    public void clickOnProfileDropDownMenu() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(profileDropDownMenu)).click();
-    }
-
-    public void clickOnLogOutOptionMenu() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(logOutOptionMenu)).click();
     }
 
     public void clickOnMyTeamOptionMenu() {
@@ -76,20 +59,7 @@ public class MainPage extends HomePage {
         return driver.findElement(By.id("add-member-button"));
 
     }
-
-    public WebElement getErrorMessageElement() {
-        return driver.findElement(By.id("error-message")); // Exemplu cu ID
-    }
-
-    public String getErrorMessage() {
-        return getErrorMessageElement().getText(); // Extrage textul de eroare
-    public String getErrorMessage(){
-       WebElement errorElement =wait.until(ExpectedConditions.visibilityOfElementLocated(erorrMessage));
-        return errorElement.getText();
+    public void clickOnOperatorTab(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(operatorTab)).click();
     }
 }
-
-
-
-
-
