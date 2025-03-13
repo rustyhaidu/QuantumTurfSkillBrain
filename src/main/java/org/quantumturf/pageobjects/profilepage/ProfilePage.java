@@ -78,22 +78,13 @@ public class ProfilePage extends MainPage {
     public void editButton() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(editButton)).click();
     }
-
-    public String incrementZipCode() {
+    public String incrementZipCode(){
         WebElement zipCodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeInput));
         String oldZip = Objects.requireNonNull(zipCodeElement.getDomAttribute("value")).trim();
         String newZip = String.valueOf(Integer.parseInt(oldZip) + 1);
         zipCodeElement.clear();
         zipCodeElement.sendKeys(newZip);
         return newZip;
-    }
-    public String  getZipCode(){
-        WebElement zipCodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeInput));
-        return zipCodeElement.getDomAttribute("value");
-    }
-
-    public void clickButtonForSave() {
-        driver.findElement(saveButton).click();
     }
 }
 
