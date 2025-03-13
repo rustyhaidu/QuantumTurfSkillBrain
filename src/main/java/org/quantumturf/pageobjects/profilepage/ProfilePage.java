@@ -8,9 +8,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.HomePage;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 
+import java.util.Objects;
+
 public class ProfilePage extends MainPage {
 
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
+    public final By myProfileOptionMenu = By.xpath("//div[.='My Profile'][@class='dwn-navbar-option']");
+    public final By editButton = By.cssSelector("button.green-button-outlined");
+    public final By zipCodeInput = By.xpath("//div[.='Zip Code']/../following-sibling::div/input");
+    public final By saveButton = By.cssSelector("button.green-button");
+
     public final By addTeamMemberButton = By.tagName("button");
     public final By addFirstName = By.xpath("//div[.='First Name']/../following-sibling::div/input");
     public final By addLastName = By.xpath("//div[.='Last Name']/../following-sibling::div/input");
@@ -59,7 +66,34 @@ public class ProfilePage extends MainPage {
         return driver.findElement(By.id("add-member-button"));
 
     }
-    public void clickOnOperatorTab(){
+
+    public void clickOnOperatorTab() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(operatorTab)).click();
     }
+
+    public void clickOnMyProfileOptionMenu() {
+        driver.findElement(myProfileOptionMenu).click();
+    }
+
+    public void editButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editButton)).click();
+    }
+
+    public String incrementZipCode() {
+        WebElement zipCodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeInput));
+        String oldZip = Objects.requireNonNull(zipCodeElement.getDomAttribute("value")).trim();
+        String newZip = String.valueOf(Integer.parseInt(oldZip) + 1);
+        zipCodeElement.clear();
+        zipCodeElement.sendKeys(newZip);
+        return newZip;
+    }
+    public String  getZipCode(){
+        WebElement zipCodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeInput));
+        return zipCodeElement.getDomAttribute("value");
+    }
+
+    public void clickButtonForSave() {
+        driver.findElement(saveButton).click();
+    }
 }
+
