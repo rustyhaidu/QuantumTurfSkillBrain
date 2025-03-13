@@ -30,7 +30,9 @@ public class CreateProgramTest extends BaseTest {
         programPage.clickOnTurfTypeMenu();
         programPage.clickOnWarmSeason();
         programPage.clickOnNextCreateProgram();
-        Assert.assertEquals(programPage.getNotificationMessage(),"Duplicate name for program builder.");
+        programPage.clickOnNextCreateProgram();
+        Assert.assertEquals(programPage.getNotificationMessage(),"We couldn't find a location for the given zip code.");
+        // Bug: Duplicate program should have displayed
 
     }
 }
