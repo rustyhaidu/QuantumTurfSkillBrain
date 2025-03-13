@@ -34,7 +34,7 @@ public class MainPage extends HomePage {
 
     public String getNotificationMessage() {
         WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(notificationMessage));
-        return notificationElement.getText() ;
+        return notificationElement.getText();
     }
 
     public void clickOnLogOutOptionMenu() {
