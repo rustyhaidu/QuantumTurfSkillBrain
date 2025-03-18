@@ -4,6 +4,7 @@ import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 import org.quantumturf.pageobjects.programpage.ProgramPage;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -38,7 +39,11 @@ public class DeleteProgramTest extends BaseTest {
         Thread.sleep(1000);
         programPage.clickOnNextCreateProgram();
         mainPage.clickOnProgramsTab();
+        Thread.sleep(1000);
         programPage.clickOnFirstTrashIcon();
-        // TO DO Add Assert
+        Thread.sleep(1000);
+        programPage.searchPrograms(uniqueProgram);
+        boolean isProgramFound = programPage.isProgramFound(uniqueProgram);
+        Assert.assertFalse(isProgramFound);
     }
 }

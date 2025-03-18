@@ -19,7 +19,10 @@ public class ProgramPage extends HomePage {
     public final By weedControl = By.xpath("//div[.='Weed Control']");
     public final By pestControl = By.xpath("//div[.='Pest Control']");
     public final By monthListSelector = By.cssSelector(".months");
-    public final By buttonDelete = By.cssSelector("img[src*='assets/img/trash.svg']");
+    public final By buttonsDelete = By.cssSelector("img[src*='assets/img/trash.svg']");
+    public final By searchProgramBar = By.cssSelector(".search-input-custom");
+    public final By programListSelector = By.cssSelector("td[scope]");
+
 
     public ProgramPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -47,7 +50,7 @@ public class ProgramPage extends HomePage {
     }
 
     public void clickOnNextCreateProgram() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(nextCreateProgramButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(nextCreateProgramButton)).click();
     }
 
     public void clickOnWeedControl() {
@@ -71,8 +74,19 @@ public class ProgramPage extends HomePage {
     }
 
     public void clickOnFirstTrashIcon() {
-        List<WebElement> button = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(buttonDelete));
-        button.get(1).click();
+        List<WebElement> buttons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(buttonsDelete));
+        buttons.getFirst().click();
     }
 
+    public void searchPrograms(String programToBeDeleted) {
+        driver.findElement(searchProgramBar).sendKeys(programToBeDeleted);
+    }
+
+    public boolean isProgramFound (String programToBeFound ){
+        List<WebElement> programs = driver.findElements(programListSelector);
+        if(programs.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 }

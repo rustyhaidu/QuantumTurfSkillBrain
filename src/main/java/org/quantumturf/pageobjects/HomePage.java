@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class HomePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -30,6 +32,10 @@ public class HomePage {
 
     public WebElement identify(By by) {
         return this.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    public List<WebElement> identifyList(By by) {
+        return this.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
     }
 
     public String getNotificationMessage() {
