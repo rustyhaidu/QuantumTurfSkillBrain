@@ -25,7 +25,7 @@ public class CreateProgramTest extends BaseTest {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.clickOnCreateProgram();
-        programPage.fillProgramNameField("Program1");
+        programPage.fillProgramNameField("Program92");
         programPage.fillZipCodeField("31231");
         programPage.clickOnTurfTypeMenu();
         programPage.clickOnWarmSeason();
