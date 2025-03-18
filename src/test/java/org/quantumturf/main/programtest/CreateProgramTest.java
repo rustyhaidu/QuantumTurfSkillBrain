@@ -21,18 +21,18 @@ public class CreateProgramTest extends BaseTest {
     }
 
     @Test
-    public void createDuplicatedProgramNegativeTest() {
+    public void createDuplicatedProgramNegativeTest() throws InterruptedException {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.clickOnCreateProgram();
-        programPage.fillProgramNameField("Program1");
+        programPage.fillProgramNameField("Program123");
         programPage.fillZipCodeField("31231");
         programPage.clickOnTurfTypeMenu();
         programPage.clickOnWarmSeason();
+        Thread.sleep(1000);
         programPage.clickOnNextCreateProgram();
-        programPage.clickOnNextCreateProgram();
-        Assert.assertEquals(programPage.getNotificationMessage(),"We couldn't find a location for the given zip code.");
-        // Bug: Duplicate program should have displayed
 
+        Assert.assertEquals(programPage.getNotificationMessage(),"Duplicate name for program builder.");
+        // Bug: Duplicate program should have displayed
     }
 }

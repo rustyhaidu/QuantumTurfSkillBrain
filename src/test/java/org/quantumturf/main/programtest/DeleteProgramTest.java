@@ -3,43 +3,42 @@ package org.quantumturf.main.programtest;
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.mainpage.MainPage;
-import org.quantumturf.pageobjects.programpage.DeleteProgram;
+import org.quantumturf.pageobjects.programpage.ProgramPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class DeleteProgramTest extends BaseTest {
     LoginPage loginPage;
     MainPage mainPage;
-    DeleteProgram deleteProgram;
+    ProgramPage programPage;
 
     @BeforeMethod
     public void setUpPages() {
         loginPage = new LoginPage(driver, wait);
         mainPage = new MainPage(driver, wait);
-        deleteProgram = new DeleteProgram(driver, wait);
+        programPage = new ProgramPage(driver, wait);
     }
+
     @Test
     public void testPozitivForDelete() throws InterruptedException {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.clickOnCreateProgram();
-        deleteProgram.fillProgramNameField("Program5");
-        deleteProgram.fillZipCodeField("43215");
-        deleteProgram.clickOnTurfTypeMenu();
-        deleteProgram.clickOnButtonSelect();
+
+        String uniqueProgram = "Program " + System.currentTimeMillis();
+
+        programPage.fillProgramNameField(uniqueProgram);
+        programPage.fillZipCodeField("43215");
+        programPage.clickOnTurfTypeMenu();
+        programPage.clickOnCoolSeason();
         Thread.sleep(1000);
-        deleteProgram.clickOnWarmSeason();
+        programPage.clickOnNextCreateProgram();
+        programPage.clickOnWeedControl();
+        programPage.selectMonths("Mar", "Feb");
         Thread.sleep(1000);
-        deleteProgram.clickOnNextCreateProgram();
-        Thread.sleep(1000);
-        deleteProgram.clickOnWeedControl();
-        Thread.sleep(1000);
-        deleteProgram.clickOnSelectMonths();
-        deleteProgram.clickOnPestControl();
-        Thread.sleep(1000);
-        deleteProgram.clickOnSelectMonthsPC();
-        deleteProgram.clickOnButtonNext();
-        Thread.sleep(1000);
-        deleteProgram.clickOnTrash();
+        programPage.clickOnNextCreateProgram();
+        mainPage.clickOnProgramsTab();
+        programPage.clickOnFirstTrashIcon();
+        // TO DO Add Assert
     }
 }
