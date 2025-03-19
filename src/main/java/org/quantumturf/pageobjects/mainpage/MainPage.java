@@ -19,7 +19,6 @@ public class MainPage extends HomePage {
     public final By logOutOptionMenu = By.xpath("//div[.='Logout']");
     public final By createProgramSelector = By.cssSelector(".green-button");
 
-
     public MainPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
