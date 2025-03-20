@@ -23,7 +23,6 @@ public class ProgramPage extends HomePage {
     public final By searchProgramBar = By.cssSelector(".search-input-custom");
     public final By programListSelector = By.cssSelector("td[scope]");
 
-
     public ProgramPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
