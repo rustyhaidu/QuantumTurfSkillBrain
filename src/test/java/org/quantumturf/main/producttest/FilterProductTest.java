@@ -4,7 +4,8 @@ import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.inventorypage.InventoryPage;
 import org.quantumturf.pageobjects.mainpage.MainPage;
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -25,8 +26,7 @@ public class FilterProductTest extends BaseTest {
         loginPage.performLogin();
         mainPage.clickOnInventoryTab();
         inventoryPage.searchProduct("Apple");
-        inventoryPage.isProductPresent("Apple");
-
+        Assert.assertTrue(inventoryPage.isProductPresent("Apple"));
 
     }
 }
