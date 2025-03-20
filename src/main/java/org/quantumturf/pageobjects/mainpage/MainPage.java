@@ -15,6 +15,7 @@ public class MainPage extends HomePage {
     public final By profileDropDownMenu = By.cssSelector("img[src*='down_icon']");
     public final By programsTab = By.xpath("//div[.='Programs']");
     public final By clientTab = By.xpath("//div[.= 'Clients']");
+    public final By inventoryTab = By.xpath("//div[.= 'Inventory']");
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
     public final By logOutOptionMenu = By.xpath("//div[.='Logout']");
     public final By createProgramSelector = By.cssSelector(".green-button");
@@ -26,6 +27,10 @@ public class MainPage extends HomePage {
     public boolean isLogoDisplayed() {
 
         return wait.until(ExpectedConditions.visibilityOfElementLocated(logoSelector)).isDisplayed();
+    }
+
+    public void clickOnInventoryTab() {
+        identify(inventoryTab).click();
     }
 
     public void clickOnProfileDropDownMenu() {
@@ -50,7 +55,7 @@ public class MainPage extends HomePage {
 //        driver.findElement(createProgramSelector).click();
     }
 
-    public void clickOnClientTab(){
+    public void clickOnClientTab() {
         identify(clientTab).click();
     }
 }
