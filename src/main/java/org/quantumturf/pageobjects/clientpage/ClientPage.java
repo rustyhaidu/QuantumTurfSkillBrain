@@ -18,6 +18,14 @@ public class ClientPage extends MainPage {
     public final By stateSelector = By.cssSelector(".dwn-item");
     public final By searchState = By.xpath("//div[.='State']/../following-sibling::div/div/input");
     public final By saveForm = By.xpath("//div[.= 'Add Client']/../following-sibling::div/button");
+    public final By firstClientEditButton = By.cssSelector("tr:nth-child(1) img[src*='dots']");
+    public final By addPropertiesButton = By.xpath("//div/div[.='Add Properties']");
+    public final By addPropertieAddress = By.cssSelector("input[placeholder='12345 Address St.']");
+    public final By addPropertieCity = By.cssSelector("input[placeholder='City']");
+    public final By addPropertieZipCode = By.cssSelector("input[placeholder='000000']");
+    public final By addPropertiesTurfType = By.xpath("//div[.='Turf Type']/../following-sibling::div/button");
+    public final By addPropertiesArea = By.cssSelector("input[placeholder='00000']");
+    public final By addPropertyButton = By.xpath("//button[.='Add Property']");
 
     public ClientPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -73,4 +81,38 @@ public class ClientPage extends MainPage {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", saveButton);
         }
     }
+
+    public void clickOnFirstClientEditButton() {
+        identify(firstClientEditButton).click();
+    }
+
+    public void clickOnAddPropertiesButton() {
+        identify(addPropertiesButton).click();
+    }
+
+    public void typeInPropertiesAddress(String propertiesAddress) {
+        identify(addPropertieAddress).sendKeys(propertiesAddress);
+    }
+
+    public void typeInPropertiesCity(String propertieCity) {
+        identify(addPropertieCity).sendKeys(propertieCity);
+    }
+
+    public void typeInPropertiesZipCode(String propertieZipCode) {
+        identify(addPropertieZipCode).sendKeys(propertieZipCode);
+    }
+
+    public void clickOnPropertiesTurfType() {
+        identify(addPropertiesTurfType).click();
+    }
+
+    public void typeInPropertiesArea(String propertiesArea) {
+        identify(addPropertiesArea).sendKeys(propertiesArea);
+    }
+
+    public void clickOnAddPropertyButton() {
+        identify(addPropertyButton).click();
+    }
+
+
 }
