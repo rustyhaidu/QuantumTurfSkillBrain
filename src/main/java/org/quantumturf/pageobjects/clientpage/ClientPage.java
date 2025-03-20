@@ -5,8 +5,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 
-import java.util.List;
-
 public class ClientPage extends MainPage {
     public final By addClientButton = By.cssSelector(".green-button");
     public final By firstName = By.xpath("//div[.='First Name']/../following-sibling::div/input");
@@ -17,6 +15,7 @@ public class ClientPage extends MainPage {
     public final By citySelector = By.xpath("//div[.='City']/../following-sibling::div/input");
     public final By zipCode = By.cssSelector("input[placeholder= '000000']");
     public final By selectState = By.cssSelector(".dwn-toggle");
+    public final By stateSelector = By.cssSelector(".dwn-item");
     public final By searchState = By.xpath("//div[.='State']/../following-sibling::div/div/input");
     public final By saveForm = By.xpath("//div[.= 'Add Client']/../following-sibling::div/button");
 
@@ -60,15 +59,9 @@ public class ClientPage extends MainPage {
         driver.findElement(selectState).click();
     }
 
-    public void inputSearchState(String... states) {
-        List<WebElement> stateList = driver.findElements(searchState);
-        for (WebElement actualState : stateList) {
-            for (String expState : states) {
-                if (actualState.getText().equals(expState)) {
-                    actualState.click();
-                }
-            }
-        }
+    public void inputSearchState(String state) {
+        identify(searchState).sendKeys(state);
+        identifyList(stateSelector).getFirst().click();
     }
 
     public void clickOnSaveForm() {
