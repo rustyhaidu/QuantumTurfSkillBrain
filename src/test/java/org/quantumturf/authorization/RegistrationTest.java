@@ -27,7 +27,7 @@ public class RegistrationTest extends BaseTest {
     @BeforeMethod
     public void setUpPage() {
         homePage = new HomePage(driver, wait);
-        registrationPage = new RegistrationPage(driver,wait);
+        registrationPage = new RegistrationPage(driver, wait);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class RegistrationTest extends BaseTest {
         homePage.clickOnRegisterButton();
         registrationPage.fillLastNameField("Ana@");
         registrationPage.getInvalidLastNameFormatErrorMessage();
-        Assert.assertEquals(registrationPage.getInvalidLastNameFormatErrorMessage(),"Invalid last name format.");
+        Assert.assertEquals(registrationPage.getInvalidLastNameFormatErrorMessage(), "Invalid last name format.");
     }
 
 }

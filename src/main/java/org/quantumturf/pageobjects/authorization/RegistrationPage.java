@@ -7,8 +7,8 @@ import org.quantumturf.pageobjects.mainpage.MainPage;
 
 public class RegistrationPage extends MainPage {
     public final By invalidFirstNameErrorMessage = By.xpath("//div[.='Invalid first name format.']");
-        public final By invalidLastNameErrorMessage = By.xpath("//div[.='Invalid last name format.']");
-    public final By lastNameFieldSelector = By.xpath("//div[.=Last Name]/following-sibling::div/input");
+    public final By invalidLastNameErrorMessage = By.xpath("//div[.='Invalid last name format.']");
+    public final By lastNameFieldSelector = By.xpath("//div[.='Last Name']/../following-sibling::div/input");
 
     public RegistrationPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -17,6 +17,7 @@ public class RegistrationPage extends MainPage {
     public String getInvalidFirstNameFormatErrorMessage() {
         return identify(invalidFirstNameErrorMessage).getText();
     }
+
     public String getInvalidLastNameFormatErrorMessage() {
         return identify(invalidLastNameErrorMessage).getText();
     }
