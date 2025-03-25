@@ -16,7 +16,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--force-device-scale-factor=0.75");
+        options.addArguments("--force-device-scale-factor=0.75");
         options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
@@ -26,7 +26,7 @@ public class BaseTest {
 
     @AfterClass
     public void tearDown() {
-        driver.quit();
+       // driver.quit();
     }
 }
 

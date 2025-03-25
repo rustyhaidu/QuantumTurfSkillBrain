@@ -5,6 +5,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientPage extends MainPage {
     public final By addClientButton = By.cssSelector(".green-button");
     public final By firstName = By.xpath("//div[.='First Name']/../following-sibling::div/input");
@@ -26,6 +29,7 @@ public class ClientPage extends MainPage {
     public final By addPropertiesTurfType = By.xpath("//div[.='Turf Type']/../following-sibling::div/button");
     public final By addPropertiesArea = By.cssSelector("input[placeholder='00000']");
     public final By addPropertyButton = By.xpath("//button[.='Add Property']");
+    public final By propertiesAddress = By.xpath("//div[.='Properties']/../following-sibling::div//td[contains(text(),',')]");
 
     public ClientPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -114,5 +118,13 @@ public class ClientPage extends MainPage {
         identify(addPropertyButton).click();
     }
 
+    public List<String> getPropertiesAddress() {
+        List<WebElement> addressElements = identifyList(propertiesAddress);
+        List<String> addressTexts = new ArrayList<>();
+        for (WebElement crtElement : addressElements) {
+            addressTexts.add(crtElement.getText());
+        }
+        return addressTexts;
+    }
 
 }

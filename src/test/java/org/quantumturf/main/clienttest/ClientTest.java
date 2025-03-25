@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ClientTest extends BaseTest {
     LoginPage loginPage;
     MainPage mainPage;
@@ -59,7 +61,9 @@ public class ClientTest extends BaseTest {
         programPage.clickOnWarmSeason();
         clientPage.typeInPropertiesArea("1000");
         clientPage.clickOnAddPropertyButton();
-        
-
+        Assert.assertEquals(clientPage.getNotificationMessage(), "Property added.");
+        List<String> addressList = clientPage.getPropertiesAddress();
+        Assert.assertTrue(addressList.contains("Adresa12, 123456"));
+        Assert.assertEquals(addressList.getFirst(),"Adresa12, 123456");
     }
 }
