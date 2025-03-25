@@ -1,9 +1,7 @@
 package org.quantumturf.pageobjects.mainpage;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.HomePage;
@@ -15,10 +13,12 @@ public class MainPage extends HomePage {
     public final By profileDropDownMenu = By.cssSelector("img[src*='down_icon']");
     public final By programsTab = By.xpath("//div[.='Programs']");
     public final By clientTab = By.xpath("//div[.= 'Clients']");
+    public final By propertyTab = By.xpath("//div[.= 'Properties']");
     public final By inventoryTab = By.xpath("//div[.= 'Inventory']");
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
     public final By logOutOptionMenu = By.xpath("//div[.='Logout']");
     public final By createProgramSelector = By.cssSelector(".green-button");
+
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -31,6 +31,10 @@ public class MainPage extends HomePage {
 
     public void clickOnInventoryTab() {
         identify(inventoryTab).click();
+    }
+
+    public void clickOnPropertyTab() {
+        identify(propertyTab).click();
     }
 
     public void clickOnProfileDropDownMenu() {
