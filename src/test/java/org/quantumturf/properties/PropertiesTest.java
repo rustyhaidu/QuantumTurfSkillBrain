@@ -23,7 +23,7 @@ public class PropertiesTest extends BaseTest {
     @Test
     public void addressProperty() {
         loginPage.performLogin();
-        mainPage.clickOnPropertiesTab();
+        mainPage.clickOnPropertyTab();
         propertiesPage.insertSearchTab("Adresa 12 ");
         Assert.assertTrue(propertiesPage.isPropertyFound("Adresa12"));
 

@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.quantumturf.pageobjects.HomePage;
+import org.quantumturf.pageobjects.mainpage.MainPage;
 
 import java.util.List;
 
-public class ProgramPage extends HomePage {
+public class ProgramPage extends MainPage {
     public final By programNameInputSelector = By.xpath("//div[.='Program Name']/../following-sibling::div/input");
     public final By zipCodeInputSelector = By.xpath("//div[.='Zip Code']/../following-sibling::div/input");
     public final By turfTypeInputSelector = By.cssSelector(".dwn-toggle");
@@ -20,8 +20,6 @@ public class ProgramPage extends HomePage {
     public final By pestControl = By.xpath("//div[.='Pest Control']");
     public final By monthListSelector = By.cssSelector(".months");
     public final By buttonsDelete = By.cssSelector("img[src*='assets/img/trash.svg']");
-    public final By searchProgramBar = By.cssSelector(".search-input-custom");
-    public final By programListSelector = By.cssSelector("td[scope]");
 
     public ProgramPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -75,17 +73,5 @@ public class ProgramPage extends HomePage {
     public void clickOnFirstTrashIcon() {
         List<WebElement> buttons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(buttonsDelete));
         buttons.getFirst().click();
-    }
-
-    public void searchPrograms(String programToBeDeleted) {
-        driver.findElement(searchProgramBar).sendKeys(programToBeDeleted);
-    }
-
-    public boolean isProgramFound (String programToBeFound ){
-        List<WebElement> programs = driver.findElements(programListSelector);
-        if(programs.isEmpty()){
-            return false;
-        }
-        return true;
     }
 }
