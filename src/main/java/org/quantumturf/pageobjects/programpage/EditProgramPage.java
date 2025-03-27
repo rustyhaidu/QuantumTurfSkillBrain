@@ -9,6 +9,8 @@ import org.quantumturf.pageobjects.mainpage.MainPage;
 import java.util.List;
 
 public class EditProgramPage extends MainPage {
+    private boolean isProductFound = true;
+
     private final By editButtons = By.cssSelector("table button");
     private final By addButton = By.xpath("//div[.= 'Add Product']");
     private final By selectProduct = By.cssSelector("button.dwn-toggle");
@@ -16,6 +18,7 @@ public class EditProgramPage extends MainPage {
     private final By rateLbs = By.cssSelector("input[placeholder]");
     private final By save = By.xpath("//div[.='Save']");
     //private final By edit = By.xpath("//table/tbody/tr[1]/td[8]/button");
+
 
     public EditProgramPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -58,4 +61,18 @@ public class EditProgramPage extends MainPage {
 //    public void clickOnEditAgain(){
 //        identify(edit).click();
 //    }
+
+    public void clickOnTrashByProductName(String productName) {
+        try {
+            identify(By.xpath("//td[.='" + productName + "']/preceding-sibling::td//img[contains(@src,'trash')]")).click();
+        } catch (Exception e) {
+            isProductFound = false;
+        }
+    }
+
+    public boolean isProductFound(){
+        return isProductFound;
+    }
+
 }
+

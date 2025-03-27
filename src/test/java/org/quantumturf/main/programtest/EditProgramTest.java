@@ -14,13 +14,14 @@ public class EditProgramTest extends BaseTest {
     EditProgramPage editProgramPage;
 
     @BeforeMethod
-    public void setUpEdit(){
-        loginPage = new LoginPage(driver,wait);
-        mainPage = new MainPage(driver,wait);
-        editProgramPage = new EditProgramPage(driver,wait);
+    public void setUpEdit() {
+        loginPage = new LoginPage(driver, wait);
+        mainPage = new MainPage(driver, wait);
+        editProgramPage = new EditProgramPage(driver, wait);
     }
+
     @Test
-    public void editProgramNegativeTest(){
+    public void editProgramNegativeTest() {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.searchItem("Program123");
@@ -35,17 +36,22 @@ public class EditProgramTest extends BaseTest {
     }
 
     @Test
-    public void editProgramPositiveTest(){
+    public void editProgramPositiveTest() throws InterruptedException {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.searchItem("Program123");
         editProgramPage.clickOnFirstEditButton();
         editProgramPage.clickOnEditButton(0);
+        editProgramPage.clickOnTrashByProductName("Plant1");
+        if (editProgramPage.isProductFound()) {
+            Assert.assertEquals(editProgramPage.getNotificationMessage(), "Product removed from program builder.");
+        }
         editProgramPage.clickOnAdd();
         editProgramPage.clickOnSelectProduct();
         editProgramPage.clickOnSelectedProduct("Plant1");
         editProgramPage.insertRate("11");
         editProgramPage.clickOnSave();
-
+        Thread.sleep(2000);
+        Assert.assertEquals(editProgramPage.getNotificationMessage(), "Product to program builder added.");
     }
 }
