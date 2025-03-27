@@ -42,8 +42,8 @@ public class DeleteProgramTest extends BaseTest {
         Thread.sleep(1000);
         programPage.clickOnFirstTrashIcon();
         Thread.sleep(1000);
-        programPage.searchPrograms(uniqueProgram);
-        boolean isProgramFound = programPage.isProgramFound(uniqueProgram);
+        programPage.searchItem(uniqueProgram);
+        boolean isProgramFound = programPage.isItemFound(uniqueProgram);
         Assert.assertFalse(isProgramFound);
     }
 }
