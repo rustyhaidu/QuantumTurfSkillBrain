@@ -3,15 +3,14 @@ package org.quantumturf.pageobjects.productpage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.mainpage.MainPage;
+
+import java.util.List;
 
 public class AddProductPage extends MainPage {
     private final By addProductButton = By.xpath("//div[.='Add Product']");
     private final By inputProductName = By.cssSelector("input[placeholder='Product name']");
-//    private final By categoryselector = By.xpath(".dwn-item");
-//    private final By type = By.xpath(".dwn-item");
     private final By registrationNumber = By.cssSelector("input[placeholder = 'EPA Registration Number']");
     private final By priceProduct = By.cssSelector("input[placeholder*='00.00']");
     private final By quantityLbs = By.cssSelector("input[placeholder ='Quantity']");
@@ -25,6 +24,9 @@ public class AddProductPage extends MainPage {
     private final By attributesMn = By.cssSelector("input[placeholder ='Mn']");
     private final By saveTheForm = By.xpath("//div[.='Add Product']/../following-sibling::div/button");
 
+    private final By categorySelector = By.xpath("//div[.='Category']/../following-sibling::div/button");
+    private final By type = By.xpath("//div[.='Type']/../following-sibling::div/button");
+    private final By dropDownValue = By.cssSelector(".dwn-item");
 
     public AddProductPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -35,18 +37,8 @@ public class AddProductPage extends MainPage {
     }
 
     public void nameProductField(String product) {
-        driver.findElement(inputProductName).sendKeys(product);
+        identify(inputProductName).sendKeys(product);
     }
-
-//    public void selectCategory() {
-//        WebElement category = wait.until(ExpectedConditions.elementToBeClickable(categoryselector));
-//        category.click();
-//    }
-//
-//    public void selectorType() {
-//        WebElement typeSelected = wait.until(ExpectedConditions.elementToBeClickable(type));
-//        typeSelected.click();
-//    }
 
     public void inputNumberRegistration(String number) {
         identify(registrationNumber).sendKeys(number);
@@ -94,5 +86,43 @@ public class AddProductPage extends MainPage {
 
     public void clickOnAdd() {
         identify(saveTheForm).click();
+    }
+
+    public void clickOnCategoryBox() {
+        identify(categorySelector).click();
+    }
+
+    public void selectorType() {
+        identify(type).click();
+    }
+
+    public void selectFromDropDown(String value) {
+        List<WebElement> elements = identifyList(dropDownValue);
+
+        for (WebElement webElement : elements) {
+            if (webElement.getText().equals(value)) {
+                webElement.click();
+                break;
+            }
+        }
+    }
+
+    public void fillProductForm() {
+        inputNumberRegistration("2");
+        insertPrice("20");
+        insertQuantity("8");
+        attributesNField("6");
+        attributesPField("8");
+        attributesValueK("9");
+        attributesValueCa("19");
+        attributesValueMg("17");
+        attributesValueS("15");
+        attributesValueFe("16");
+        attributesValueMn("21");
+
+        clickOnCategoryBox();
+        selectFromDropDown("Fertilizer");
+        selectorType();
+        selectFromDropDown("Granular");
     }
 }

@@ -4,6 +4,7 @@ import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 import org.quantumturf.pageobjects.productpage.AddProductPage;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -20,25 +21,31 @@ public class AddProductTest extends BaseTest {
     }
 
     @Test
-    public void addProduct() throws InterruptedException {
+    public void addProduct() {
         loginPage.performLogin();
         mainPage.clickOnInventoryTab();
         addProductPage.clickOnAddProduct();
-        addProductPage.nameProductField("Banana");
-//        addProductPage.selectCategory();
-//        addProductPage.selectorType();
-        addProductPage.inputNumberRegistration("2");
-        addProductPage.insertPrice("20");
-        addProductPage.insertQuantity("8");
-        addProductPage.attributesNField("6");
-        addProductPage.attributesPField("8");
-        addProductPage.attributesValueK("9");
-        addProductPage.attributesValueCa("19");
-        addProductPage.attributesValueMg("17");
-        addProductPage.attributesValueS("15");
-        addProductPage.attributesValueFe("16");
-        addProductPage.attributesValueMn("21");
+        addProductPage.fillProductForm();
+
+        //addProductPage.nameProductField("Banana");
+        String crtMills = String.valueOf(System.currentTimeMillis());
+        addProductPage.nameProductField(crtMills);
         addProductPage.clickOnAdd();
 
+        addProductPage.searchItem(crtMills);
+        Assert.assertTrue(addProductPage.isItemFound(crtMills));
     }
+
+    @Test
+    public void addProductNegativeTest() {
+        loginPage.performLogin();
+        mainPage.clickOnInventoryTab();
+        addProductPage.clickOnAddProduct();
+        addProductPage.fillProductForm();
+        addProductPage.nameProductField("Banana");
+        addProductPage.clickOnAdd();
+        Assert.assertEquals(addProductPage.getNotificationMessage(), "Duplicate name for products.");
+
+    }
+
 }

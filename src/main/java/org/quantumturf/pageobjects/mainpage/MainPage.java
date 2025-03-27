@@ -1,12 +1,13 @@
 package org.quantumturf.pageobjects.mainpage;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.HomePage;
+
+import java.util.List;
 
 
 public class MainPage extends HomePage {
@@ -20,6 +21,9 @@ public class MainPage extends HomePage {
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
     public final By logOutOptionMenu = By.xpath("//div[.='Logout']");
     public final By createProgramSelector = By.cssSelector(".green-button");
+    public final By searchBar = By.cssSelector(".search-input-custom");
+    //public final By itemsFoundListSelector = By.cssSelector("td[scope]");
+    public final By itemsFoundListSelector = By.cssSelector("td[style*='50px']:nth-child(1)");
 
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
@@ -63,5 +67,25 @@ public class MainPage extends HomePage {
 
     public void clickOnClientTab() {
         identify(clientTab).click();
+    }
+
+    public boolean isItemFound(String textToBeFound) {
+        List<WebElement> elements = identifyList(itemsFoundListSelector);
+        if (elements.isEmpty()) {
+            return false;
+        } else {
+            for (WebElement webElement : elements) {
+                if (webElement.getText().equals(textToBeFound)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    public void searchItem(String textToBeFound) {
+        driver.findElement(searchBar).sendKeys(textToBeFound);
     }
 }
