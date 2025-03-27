@@ -4,6 +4,7 @@ import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 import org.quantumturf.pageobjects.programpage.EditProgramPage;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,16 +20,32 @@ public class EditProgramTest extends BaseTest {
         editProgramPage = new EditProgramPage(driver,wait);
     }
     @Test
-    public void editProgramTest(){
+    public void editProgramNegativeTest(){
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
-        editProgramPage.clickOnPoints();
-        editProgramPage.clickOnButton();
+        mainPage.searchItem("Program123");
+        editProgramPage.clickOnFirstEditButton();
+        editProgramPage.clickOnEditButton(0);
         editProgramPage.clickOnAdd();
-        editProgramPage.clickOnSelect();
-        editProgramPage.clickOnPlant();
-        editProgramPage.insertbRate("11");
+        editProgramPage.clickOnSelectProduct();
+        editProgramPage.clickOnSelectedProduct("orange");
+        editProgramPage.insertRate("11");
         editProgramPage.clickOnSave();
-//        editProgramPage.clickOnEditAgain();
+        Assert.assertEquals(editProgramPage.getNotificationMessage(), "Product is already in this program builder.");
+    }
+
+    @Test
+    public void editProgramPositiveTest(){
+        loginPage.performLogin();
+        mainPage.clickOnProgramsTab();
+        mainPage.searchItem("Program123");
+        editProgramPage.clickOnFirstEditButton();
+        editProgramPage.clickOnEditButton(0);
+        editProgramPage.clickOnAdd();
+        editProgramPage.clickOnSelectProduct();
+        editProgramPage.clickOnSelectedProduct("Plant1");
+        editProgramPage.insertRate("11");
+        editProgramPage.clickOnSave();
+
     }
 }

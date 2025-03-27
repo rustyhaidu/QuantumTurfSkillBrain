@@ -21,7 +21,6 @@ public class ClientPage extends MainPage {
     public final By stateSelector = By.cssSelector(".dwn-item");
     public final By searchState = By.xpath("//div[.='State']/../following-sibling::div/div/input");
     public final By saveForm = By.xpath("//div[.= 'Add Client']/../following-sibling::div/button");
-    public final By firstClientEditButton = By.cssSelector("tr:nth-child(1) img[src*='dots']");
     public final By addPropertiesButton = By.xpath("//div/div[.='Add Properties']");
     public final By addPropertieAddress = By.cssSelector("input[placeholder='12345 Address St.']");
     public final By addPropertieCity = By.cssSelector("input[placeholder='City']");
@@ -84,10 +83,6 @@ public class ClientPage extends MainPage {
         } catch (ElementClickInterceptedException e) {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", saveButton);
         }
-    }
-
-    public void clickOnFirstClientEditButton() {
-        identify(firstClientEditButton).click();
     }
 
     public void clickOnAddPropertiesButton() {

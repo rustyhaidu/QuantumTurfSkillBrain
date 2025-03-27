@@ -2,6 +2,7 @@ package org.quantumturf.pageobjects.mainpage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.HomePage;
@@ -23,7 +24,7 @@ public class MainPage extends HomePage {
     public final By searchBar = By.cssSelector(".search-input-custom");
     //public final By itemsFoundListSelector = By.cssSelector("td[scope]");
     public final By itemsFoundListSelector = By.cssSelector("td[style*='50px']:nth-child(1)");
-
+    public final By firstItemEditButton = By.cssSelector("tr:nth-child(1) img[src*='dots']");
 
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
@@ -84,8 +85,11 @@ public class MainPage extends HomePage {
         return false;
     }
 
-
     public void searchItem(String textToBeFound) {
-        driver.findElement(searchBar).sendKeys(textToBeFound);
+        identify(searchBar).sendKeys(textToBeFound);
+    }
+
+    public void clickOnFirstEditButton() {
+        identify(firstItemEditButton).click();
     }
 }

@@ -50,7 +50,7 @@ public class ClientTest extends BaseTest {
     public void addAnotherProperty() {
         loginPage.performLogin();
         mainPage.clickOnClientTab();
-        clientPage.clickOnFirstClientEditButton();
+        clientPage.clickOnFirstEditButton();
         clientPage.clickOnAddPropertiesButton();
         clientPage.typeInPropertiesAddress("Adresa12");
         clientPage.typeInPropertiesCity("Bucharest");

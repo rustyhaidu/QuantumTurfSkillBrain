@@ -2,15 +2,17 @@ package org.quantumturf.pageobjects.programpage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.quantumturf.pageobjects.mainpage.MainPage;
 
+import java.util.List;
+
 public class EditProgramPage extends MainPage {
-    private final By threePoints = By.xpath("//table/tbody/tr[1]/td[6]//div/div[1]");
-    private final By buttonEdit = By.xpath("//table/tbody/tr[1]/td[8]/button");
+    private final By editButtons = By.cssSelector("table button");
     private final By addButton = By.xpath("//div[.= 'Add Product']");
-    private final By select = By.cssSelector("button.dwn-toggle");
-    private final By plantSelect = By.xpath("//div[contains(@class, 'dwn')]//li[2]");
+    private final By selectProduct = By.cssSelector("button.dwn-toggle");
+    private final By selectProductList = By.tagName("li");
     private final By rateLbs = By.cssSelector("input[placeholder]");
     private final By save = By.xpath("//div[.='Save']");
     //private final By edit = By.xpath("//table/tbody/tr[1]/td[8]/button");
@@ -19,31 +21,38 @@ public class EditProgramPage extends MainPage {
         super(driver, wait);
     }
 
-    public void clickOnPoints() {
-        identify(threePoints).click();
-    }
-
-    public void clickOnButton() {
-        identify(buttonEdit).click();
+    public void clickOnEditButton(int index) {
+        identifyList(editButtons).get(index).click();
     }
 
     public void clickOnAdd() {
         identify(addButton).click();
     }
 
-    public void clickOnSelect() {
-        identify(select).click();
+    public void clickOnSelectProduct() {
+        identify(selectProduct).click();
     }
 
-    public void clickOnPlant() {
-        identify(plantSelect).click();
+    public void clickOnSelectedProductFromList(String productName) {
+        List<WebElement> products = identifyList(selectProductList);
+        for (WebElement webElement : products) {
+            if (webElement.getText().equals(productName)) {
+                webElement.click();
+                break;
+            }
+        }
     }
 
-    public void insertbRate(String number) {
+    public void clickOnSelectedProduct(String productName) {
+        identify(By.xpath("//li[.='" + productName + "']")).click();
+    }
+
+    public void insertRate(String number) {
+        identify(rateLbs).clear();
         identify(rateLbs).sendKeys(number);
     }
 
-    public void clickOnSave(){
+    public void clickOnSave() {
         identify(save).click();
     }
 //    public void clickOnEditAgain(){
