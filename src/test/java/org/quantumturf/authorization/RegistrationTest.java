@@ -1,9 +1,7 @@
 package org.quantumturf.authorization;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -54,30 +52,18 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void registrationInvalidEmail() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.quantumturf.com");
-        driver.findElement(By.cssSelector(".header a[href*='signup'")).click();
-        driver.findElement(By.xpath("//div[.='Email']/following-sibling::div/input"))
-                .sendKeys("alinamarie0426gmail.com");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//div[.='Email']/following-sibling::div[@class='text-red text-small mt-1']")));
-
-        Assert.assertTrue(errorMessage.isDisplayed());
-        Assert.assertEquals(errorMessage.getText(), "Invalid email format.");
+        homePage.clickOnRegisterButton();
+        registrationPage.fillEmailField("stoenescumihai.com");
+        registrationPage.getInvalidEmailFormatErrorMessage();
+        Assert.assertEquals(registrationPage.getInvalidEmailFormatErrorMessage(), "Invalid email format.");
     }
 
     @Test
     public void registrationInvalidFirstName() {
         homePage.clickOnRegisterButton();
-        driver.findElement(By.xpath("//div[.='First Name']/following-sibling::div/input")).sendKeys("A");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement errorFirstNameMessage = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//div[.='Invalid first name format.']")));
-        Assert.assertTrue(errorFirstNameMessage.isDisplayed());
-        Assert.assertEquals(errorFirstNameMessage.getText(), "Invalid first name format.");
+        registrationPage.fillFirstNameField("Ana@");
+        registrationPage.getInvalidFirstNameFormatErrorMessage();
+        Assert.assertEquals(registrationPage.getInvalidFirstNameFormatErrorMessage(), "Invalid first name format.");
 
     }
 
@@ -89,4 +75,49 @@ public class RegistrationTest extends BaseTest {
         Assert.assertEquals(registrationPage.getInvalidLastNameFormatErrorMessage(), "Invalid last name format.");
     }
 
+    @Test
+    public void registrationInvalidPassword() {
+        homePage.clickOnRegisterButton();
+        registrationPage.fillFirstNameField("Ana");
+        registrationPage.fillLastNameField("Banana");
+        registrationPage.fillEmailField("anabanana@gmail.com");
+        registrationPage.fillPasswordFieldSelector("1");
+        registrationPage.clickOnTemsAndConditionsCheckbox();
+        registrationPage.clickOnPrivacyPolicyCheckbox();
+        registrationPage.clickOnGetStartedButton();
+        registrationPage.getRegistrationPageErrorMessage();
+        Assert.assertEquals(registrationPage.getRegistrationPageErrorMessage(), "Password does not contain minimum security requirements (8 chars., 1 digit, 1 upper and 1 special char.)");
+    }
+
+    @Test
+    public void registrationInvalidBothCheckBoxes() {
+        homePage.clickOnRegisterButton();
+        registrationPage.fillFirstNameField("Ana");
+        registrationPage.fillLastNameField("Banana");
+        registrationPage.fillEmailField("anabanana@gmail.com");
+        registrationPage.clickOnGetStartedButton();
+        Assert.assertEquals(registrationPage.getRegistrationPageErrorMessage(), "You have to accept the privacy policy and the terms and conditions.");
+    }
+
+    @Test
+    public void registrationInvalidPrivacyPolicyCheckBoxe() {
+        homePage.clickOnRegisterButton();
+        registrationPage.fillFirstNameField("Ana");
+        registrationPage.fillLastNameField("Banana");
+        registrationPage.fillEmailField("anabanana@gmail.com");
+        registrationPage.clickOnTemsAndConditionsCheckbox();
+        registrationPage.clickOnGetStartedButton();
+        Assert.assertEquals(registrationPage.getRegistrationPageErrorMessage(), "You have to accept the privacy policy and the terms and conditions.");
+    }
+
+    @Test
+    public void registrationInvalidTemsAndCoditionsCheckBoxe() {
+        homePage.clickOnRegisterButton();
+        registrationPage.fillFirstNameField("Ana");
+        registrationPage.fillLastNameField("Banana");
+        registrationPage.fillEmailField("anabanana@gmail.com");
+        registrationPage.clickOnPrivacyPolicyCheckbox();
+        registrationPage.clickOnGetStartedButton();
+        Assert.assertEquals(registrationPage.getRegistrationPageErrorMessage(), "You have to accept the privacy policy and the terms and conditions.");
+    }
 }
