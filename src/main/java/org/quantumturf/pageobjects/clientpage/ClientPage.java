@@ -29,6 +29,8 @@ public class ClientPage extends MainPage {
     public final By addPropertiesArea = By.cssSelector("input[placeholder='00000']");
     public final By addPropertyButton = By.xpath("//button[.='Add Property']");
     public final By propertiesAddress = By.xpath("//div[.='Properties']/../following-sibling::div//td[contains(text(),',')]");
+    public final By editButton = By.cssSelector("button.green-button.d-flex");
+    public final By editClient = By.xpath("//div[.='Edit Client']/../following-sibling::div/button");
 
     public ClientPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -122,4 +124,12 @@ public class ClientPage extends MainPage {
         return addressTexts;
     }
 
+    public void clickOnEdit() {
+        identify(editButton).click();
+    }
+
+    public void clickOnEditClient() {
+        identify(editClient).click();
+    }
 }
+
