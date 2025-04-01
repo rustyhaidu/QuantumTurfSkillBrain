@@ -1,5 +1,6 @@
 package org.quantumturf.main.clienttest;
 
+import net.datafaker.Faker;
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.clientpage.ClientPage;
@@ -16,6 +17,7 @@ public class ClientTest extends BaseTest {
     MainPage mainPage;
     ClientPage clientPage;
     ProgramPage programPage;
+    Faker faker;
 
     @BeforeMethod
     public void setUpClientPages() {
@@ -23,6 +25,7 @@ public class ClientTest extends BaseTest {
         mainPage = new MainPage(driver, wait);
         clientPage = new ClientPage(driver, wait);
         programPage = new ProgramPage(driver, wait);
+        faker = new Faker();
     }
 
     @Test
@@ -38,7 +41,7 @@ public class ClientTest extends BaseTest {
         clientPage.inputAddress("Strada Florilor");
         clientPage.inputCitySelector("Alabama");
         clientPage.inputZipCode("123456");
-        clientPage.inputStateSelector();
+        clientPage.clickOnInputStateSelector();
         clientPage.inputSearchState("NY");
         Thread.sleep(1000);
         clientPage.clickOnSaveForm();
@@ -50,12 +53,12 @@ public class ClientTest extends BaseTest {
     public void addAnotherProperty() {
         loginPage.performLogin();
         mainPage.clickOnClientTab();
-        clientPage.clickOnFirstEditButton();
+        clientPage.clickOnFirstThreeDotsButton();
         clientPage.clickOnAddPropertiesButton();
         clientPage.typeInPropertiesAddress("Adresa12");
         clientPage.typeInPropertiesCity("Bucharest");
         clientPage.typeInPropertiesZipCode("123456");
-        clientPage.inputStateSelector();
+        clientPage.clickOnInputStateSelector();
         clientPage.inputSearchState("NY");
         clientPage.clickOnPropertiesTurfType();
         programPage.clickOnWarmSeason();
@@ -64,6 +67,30 @@ public class ClientTest extends BaseTest {
         Assert.assertEquals(clientPage.getNotificationMessage(), "Property added.");
         List<String> addressList = clientPage.getPropertiesAddress();
         Assert.assertTrue(addressList.contains("Adresa12, 123456"));
-        Assert.assertEquals(addressList.getFirst(),"Adresa12, 123456");
+        Assert.assertEquals(addressList.getFirst(), "Adresa12, 123456");
+    }
+
+    @Test
+    public void editClientTestPozitiv() {
+        loginPage.performLogin();
+        mainPage.clickOnClientTab();
+        mainPage.clickOnFirstThreeDotsButton();
+        clientPage.clickOnEdit();
+        String name = faker.name().lastName();
+        clientPage.insertName(name);
+        String phoneNumber = faker.phoneNumber().phoneNumber().replace("(","").replace(")","");
+        clientPage.inputPhoneNumber(phoneNumber);
+        String street = faker.address().streetAddress();
+        clientPage.inputAddress(street);
+        String city = faker.address().city();
+        clientPage.inputCitySelector(city);
+        String zipCode = faker.address().zipCode();
+        clientPage.inputZipCode(zipCode);
+        clientPage.clickOnInputStateSelector();
+        String state = faker.address().stateAbbr();
+        System.out.println("Statul nostru este :" + state);
+        clientPage.inputSearchState(state);
+        clientPage.clickOnEditClient();
+        Assert.assertEquals(clientPage.getNotificationMessage(),"Lawn Customer updated.");
     }
 }

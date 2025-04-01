@@ -89,7 +89,7 @@ public class MainPage extends HomePage {
         identify(searchBar).sendKeys(textToBeFound);
     }
 
-    public void clickOnFirstEditButton() {
+    public void clickOnFirstThreeDotsButton() {
         identify(firstItemEditButton).click();
     }
 }
