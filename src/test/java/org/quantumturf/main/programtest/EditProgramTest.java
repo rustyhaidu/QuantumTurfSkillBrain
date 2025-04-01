@@ -25,7 +25,7 @@ public class EditProgramTest extends BaseTest {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.searchItem("Program123");
-        editProgramPage.clickOnFirstEditButton();
+        editProgramPage.clickOnFirstThreeDotsButton();
         editProgramPage.clickOnEditButton(0);
         editProgramPage.clickOnAdd();
         editProgramPage.clickOnSelectProduct();
@@ -40,7 +40,7 @@ public class EditProgramTest extends BaseTest {
         loginPage.performLogin();
         mainPage.clickOnProgramsTab();
         mainPage.searchItem("Program123");
-        editProgramPage.clickOnFirstEditButton();
+        editProgramPage.clickOnFirstThreeDotsButton();
         editProgramPage.clickOnEditButton(0);
         editProgramPage.clickOnTrashByProductName("Plant1");
         if (editProgramPage.isProductFound()) {

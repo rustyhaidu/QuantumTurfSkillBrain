@@ -29,6 +29,10 @@ public class ClientPage extends MainPage {
     public final By addPropertiesArea = By.cssSelector("input[placeholder='00000']");
     public final By addPropertyButton = By.xpath("//button[.='Add Property']");
     public final By propertiesAddress = By.xpath("//div[.='Properties']/../following-sibling::div//td[contains(text(),',')]");
+    public final By editButton = By.cssSelector("div.drawer.open .green-button-outlined");
+    public final By editClient = By.xpath("//div[.='Edit Client']/../following-sibling::div/button");
+    public final By buttonBack = By.xpath("(//div[@class='drawer-content'])[2]//button[@class='very-light-grey-button btn btn-primary']");
+    public final By nameField = By.cssSelector("input[placeholder='First Name Last Name']");
 
     public ClientPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -39,7 +43,9 @@ public class ClientPage extends MainPage {
     }
 
     public void inputFirstName(String firstName) {
-        identify(this.firstName).sendKeys(firstName);
+        WebElement name = identify(this.firstName);
+        name.clear();
+        name.sendKeys(firstName);
     }
 
     public void inputLastName(String lastName) {
@@ -51,22 +57,30 @@ public class ClientPage extends MainPage {
     }
 
     public void inputPhoneNumber(String phoneNumber) {
-        identify(this.phoneNumber).sendKeys(phoneNumber);
+        WebElement number = identify(this.phoneNumber);
+        number.clear();
+        number.sendKeys(phoneNumber);
     }
 
     public void inputAddress(String addressInput) {
-        identify(this.addressInput).sendKeys(addressInput);
+        WebElement address = identify(this.addressInput);
+        address.clear();
+        address.sendKeys(addressInput);
     }
 
     public void inputCitySelector(String citySelector) {
-        identify(this.citySelector).sendKeys(citySelector);
+        WebElement city = identify(this.citySelector);
+        city.clear();
+        city.sendKeys(citySelector);
     }
 
     public void inputZipCode(String zipCode) {
-        identify(this.zipCode).sendKeys(zipCode);
+        WebElement zipCodeElement = identify(this.zipCode);
+        zipCodeElement.clear();
+        zipCodeElement.sendKeys(zipCode);
     }
 
-    public void inputStateSelector() {
+    public void clickOnInputStateSelector() {
         driver.findElement(selectState).click();
     }
 
@@ -122,4 +136,20 @@ public class ClientPage extends MainPage {
         return addressTexts;
     }
 
+    public void clickOnEdit() {
+        identify(editButton).click();
+    }
+
+    public void clickOnEditClient() {
+        identify(editClient).click();
+    }
+
+    public void clickOnBack() {
+        identify(buttonBack).click();
+    }
+
+    public void insertName(String name) {
+        identify(nameField).sendKeys(name);
+    }
 }
+
