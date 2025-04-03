@@ -41,8 +41,9 @@ public class AddContactTest extends BaseTest {
         addContactPage.clickOnBack();
         Assert.assertTrue(addContactPage.isAddressInList("Ana Ionescu"));
     }
+
     @Test
-    public void addContactTestPozitiv(){
+    public void addContactTestPozitiv() {
         loginPage.performLogin();
         mainPage.clickOnClientTab();
         mainPage.searchItem("Maria PopescuLebsacke");
@@ -54,11 +55,32 @@ public class AddContactTest extends BaseTest {
         addContactPage.inputLastName(lastNameFaker);
         String emailFaker = faker.internet().emailAddress();
         addContactPage.inputEmail(emailFaker);
-        String phoneFaker= faker.phoneNumber().phoneNumber().replace("(","").replace(")","");
+        String phoneFaker = faker.phoneNumber().phoneNumber().replace("(", "").replace(")", "");
         addContactPage.inputPhoneNumber(phoneFaker);
         addContactPage.clickOnAddClient();
-        Assert.assertEquals(addContactPage.getNotificationMessage(),"Contact added.");
+        Assert.assertEquals(addContactPage.getNotificationMessage(), "Contact added.");
         String firstNameInList = addContactPage.getFirstContactInList();
-        Assert.assertEquals(firstNameInList,firstNameFaker + " " + lastNameFaker);
+        Assert.assertEquals(firstNameInList, firstNameFaker + " " + lastNameFaker);
+    }
+
+    @Test
+    public void addClientContactNegativeWithInvalidData(){
+        loginPage.performLogin();
+        mainPage.clickOnClientTab();
+        mainPage.searchItem("Maria PopescuLebsacke");
+        addContactPage.clickOnFirstThreeDotsButton();
+        addContactPage.clickOnAddContact();
+        String firstnameFaker = faker.number().digits(6);
+        addContactPage.inputFirstName(firstnameFaker);
+        String lastNameFaker = faker.number().digits(6);
+        addContactPage.inputLastName(lastNameFaker);
+        String emailFaker = faker.number().digits(6);
+        addContactPage.inputEmail(emailFaker);
+        String phoneNumberFaker = faker.lorem().characters(6,6,true,true);
+        addContactPage.typeAndDeletePhoneNumber(phoneNumberFaker);
+        Assert.assertEquals(addContactPage.getFirstNameInvalidMessage(),"Invalid name.");
+        Assert.assertEquals(addContactPage.getLastNameInvalidMessage(),"Invalid name.");
+        Assert.assertEquals(addContactPage.getPhoneNumberInvalidMessage(),"Invalid phone number.");
+        Assert.assertEquals(addContactPage.getEmailInvalidMessage(),"Invalid email.");
     }
 }

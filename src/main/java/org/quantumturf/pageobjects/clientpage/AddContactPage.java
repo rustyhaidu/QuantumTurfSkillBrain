@@ -1,6 +1,7 @@
 package org.quantumturf.pageobjects.clientpage;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,7 +22,10 @@ public class AddContactPage extends MainPage {
     private final By buttonBack = By.xpath("(//div[@class='drawer-content'])[2]//button[@class='very-light-grey-button btn btn-primary']");
     private final By popUP = By.cssSelector("button.close-btnbutton.close-btn");
     private final By contactListSelector = By.xpath("//div[.='Contacts']/../..//table/tbody/tr/td[1]");
-
+    private final By invalidFirstName = By.xpath("//div[.='First Name']/../following-sibling::div[contains(@class,'text-red')]");
+    private final By invalidLastName = By.xpath("//div[.='Last Name']/../following-sibling::div[contains(@class,'text-red')]");
+    private final By invalidEmail = By.xpath("//div[.='Email']/../following-sibling::div[contains(@class,'text-red')]");
+    private final By invalidPhoneNumber = By.xpath("//div[.='Phone Number']/../following-sibling::div[contains(@class,'text-red')]");
 
     public AddContactPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -48,15 +52,15 @@ public class AddContactPage extends MainPage {
     }
 
     public void inputEmail(String mail) {
-        WebElement emailElement= identify(email);
+        WebElement emailElement = identify(email);
         emailElement.clear();
         emailElement.sendKeys(mail);
     }
 
     public void inputPhoneNumber(String number) {
-        WebElement phoneNumberElemnent= identify(phoneNumber);
+        WebElement phoneNumberElemnent = identify(phoneNumber);
         phoneNumberElemnent.clear();
-       phoneNumberElemnent.sendKeys(number);
+        phoneNumberElemnent.sendKeys(number);
     }
 
     public void clickOnAddClient() {
@@ -82,8 +86,32 @@ public class AddContactPage extends MainPage {
         wait.until(ExpectedConditions.elementToBeClickable(popUP)).click();
     }
 
-    public String getFirstContactInList(){
+    public String getFirstContactInList() {
         List<WebElement> contacts = identifyList(contactListSelector);
         return contacts.getFirst().getText();
+    }
+
+    public String getFirstNameInvalidMessage() {
+        return identify(invalidFirstName).getText();
+    }
+
+    public String getLastNameInvalidMessage() {
+        return identify(invalidLastName).getText();
+    }
+
+    public String getEmailInvalidMessage() {
+        return identify(invalidEmail).getText();
+    }
+
+    public void typeAndDeletePhoneNumber(String phoneNumber) {
+        WebElement phoneInput = identify(this.phoneNumber);
+        phoneInput.sendKeys(phoneNumber);
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            phoneInput.sendKeys(Keys.BACK_SPACE);
+        }
+    }
+
+    public String getPhoneNumberInvalidMessage() {
+        return identify(invalidPhoneNumber).getText();
     }
 }
