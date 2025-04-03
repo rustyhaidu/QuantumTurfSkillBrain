@@ -37,10 +37,6 @@ public class DevTools {
         });
     }
 
-    public AtomicBoolean isRequestFound() {
-        return requestFound;
-    }
-
     public boolean isRequestFoundNonAtomic() {
         wait.until((ExpectedCondition<Boolean>) driver -> requestFound.get());
         return requestFound.get();
