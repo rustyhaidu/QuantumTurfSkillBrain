@@ -21,17 +21,16 @@ public class SchedulerTest extends BaseTest {
         loginPage = new LoginPage(driver, wait);
         mainPage = new MainPage(driver, wait);
         schedulerPage = new SchedulerPage(driver, wait);
-        devTools = new DevTools(driver);
+        devTools = new DevTools(driver, wait);
     }
 
     @Test
-    public void mapControlsTest() throws InterruptedException {
+    public void mapControlsTest() {
         loginPage.performLogin();
         mainPage.clickOnSchedulerTab();
         schedulerPage.clickOnCameraControls();
         devTools.startInterception("maps.googleapis.com");
         schedulerPage.clickOnMapDownControl();
-        Thread.sleep(2000);
-        Assert.assertTrue(devTools.isRequestFound().get());
+        Assert.assertTrue(devTools.isRequestFoundNonAtomic());
     }
 }
