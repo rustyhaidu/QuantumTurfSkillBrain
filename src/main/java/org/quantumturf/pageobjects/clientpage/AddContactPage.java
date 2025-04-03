@@ -17,9 +17,10 @@ public class AddContactPage extends MainPage {
     private final By email = By.cssSelector("input[placeholder='Email']");
     private final By phoneNumber = By.cssSelector("input[placeholder='000000000']");
     private final By buttonSave = By.xpath("//div[.='Add Contact']/../following-sibling::div/button");
-    private final By contactList = By.cssSelector("div.drawer-content table tr td:nth-child(1)");
+    private final By addressList = By.cssSelector("div.drawer-content table tr td:nth-child(1)");
     private final By buttonBack = By.xpath("(//div[@class='drawer-content'])[2]//button[@class='very-light-grey-button btn btn-primary']");
     private final By popUP = By.cssSelector("button.close-btnbutton.close-btn");
+    private final By contactListSelector = By.xpath("//div[.='Contacts']/../..//table/tbody/tr/td[1]");
 
 
     public AddContactPage(WebDriver driver, WebDriverWait wait) {
@@ -35,27 +36,35 @@ public class AddContactPage extends MainPage {
     }
 
     public void inputFirstName(String name) {
-        identify(firstName).sendKeys(name);
+        WebElement nameElement = identify(firstName);
+        nameElement.clear();
+        nameElement.sendKeys(name);
     }
 
     public void inputLastName(String name) {
-        identify(lastName).sendKeys(name);
+        WebElement lastNameElement = identify(lastName);
+        lastNameElement.clear();
+        lastNameElement.sendKeys(name);
     }
 
     public void inputEmail(String mail) {
-        identify(email).sendKeys(mail);
+        WebElement emailElement= identify(email);
+        emailElement.clear();
+        emailElement.sendKeys(mail);
     }
 
     public void inputPhoneNumber(String number) {
-        identify(phoneNumber).sendKeys(number);
+        WebElement phoneNumberElemnent= identify(phoneNumber);
+        phoneNumberElemnent.clear();
+       phoneNumberElemnent.sendKeys(number);
     }
 
     public void clickOnAddClient() {
         identify(buttonSave).click();
     }
 
-    public boolean isContactInList(String value) {
-        List<WebElement> elements = identifyList(contactList);
+    public boolean isAddressInList(String value) {
+        List<WebElement> elements = identifyList(addressList);
 
         for (WebElement webElement : elements) {
             if (webElement.getText().equals(value)) {
@@ -68,7 +77,13 @@ public class AddContactPage extends MainPage {
     public void clickOnBack() {
         wait.until(ExpectedConditions.elementToBeClickable(buttonBack)).click();
     }
-    public void closePopUp(){
+
+    public void closePopUp() {
         wait.until(ExpectedConditions.elementToBeClickable(popUP)).click();
+    }
+
+    public String getFirstContactInList(){
+        List<WebElement> contacts = identifyList(contactListSelector);
+        return contacts.getFirst().getText();
     }
 }
