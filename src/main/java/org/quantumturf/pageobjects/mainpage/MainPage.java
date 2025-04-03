@@ -16,6 +16,7 @@ public class MainPage extends HomePage {
     public final By profileDropDownMenu = By.cssSelector("img[src*='down_icon']");
     public final By programsTab = By.xpath("//div[.='Programs']");
     public final By clientTab = By.xpath("//div[.= 'Clients']");
+    public final By schedulerTab = By.xpath("//div[.= 'Scheduler']");
     public final By propertyTab = By.xpath("//div[.= 'Properties']");
     public final By inventoryTab = By.xpath("//div[.= 'Inventory']");
     public final By myTeamOptionMenu = By.xpath("//div[.='My Team'][@class='dwn-navbar-option']");
@@ -42,6 +43,10 @@ public class MainPage extends HomePage {
 
     public void clickOnPropertyTab() {
         identify(propertyTab).click();
+    }
+
+    public void clickOnSchedulerTab() {
+        identify(schedulerTab).click();
     }
 
     public void clickOnProfileDropDownMenu() {

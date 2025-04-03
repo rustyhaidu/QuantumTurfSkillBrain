@@ -36,8 +36,8 @@ public class AddContactTest extends BaseTest {
         addContactPage.inputPhoneNumber("0786543223");
         addContactPage.clickOnAddClient();
         Assert.assertEquals(addContactPage.getNotificationMessage(), "User is already associated with this company in this role.");
-       Thread.sleep(10000);
-       // addContactPage.closePopUp();
+        Thread.sleep(10000);
+        // addContactPage.closePopUp();
         addContactPage.clickOnBack();
         Assert.assertTrue(addContactPage.isAddressInList("Ana Ionescu"));
     }
