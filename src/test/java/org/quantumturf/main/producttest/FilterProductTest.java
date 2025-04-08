@@ -1,4 +1,5 @@
-package org.QuantumTurf.main.producttest;
+package org.quantumturf.main.producttest;
+
 
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
