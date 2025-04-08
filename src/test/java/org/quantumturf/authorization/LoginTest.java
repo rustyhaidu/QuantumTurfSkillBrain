@@ -1,6 +1,5 @@
 package org.quantumturf.authorization;
 
-import net.bytebuddy.asm.Advice;
 import net.datafaker.Faker;
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
@@ -31,11 +30,11 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void forgotPassword() {
+    public void emptyPasswordLoginNegativeTest() {
         loginPage.clickOnSignInButton();
         loginPage.fillEmailField("rustyhaidu@gmail.com");
         String passwordFaker = faker.lorem().characters(6, 6, true, true);
-        loginPage.typePassword(passwordFaker);
+        loginPage.typeAndDeletePassword(passwordFaker);
         loginPage.clickOnContinue();
         Assert.assertEquals(loginPage.getNotificationMessage(),"Username/Password incorrect!");
     }

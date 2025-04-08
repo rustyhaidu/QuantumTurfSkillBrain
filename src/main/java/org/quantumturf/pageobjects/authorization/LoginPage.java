@@ -21,7 +21,8 @@ public class LoginPage extends HomePage {
     public void fillEmailField(String email) {
         driver.findElement(emailFieldSelector).sendKeys(email);
     }
-    public void typePassword(String wrongPassword) {
+
+    public void typeAndDeletePassword(String wrongPassword) {
         WebElement passwordInput = identify(this.passworldFieldSelector);
         passwordInput.sendKeys(wrongPassword);
         for (int i = 0; i < wrongPassword.length(); i++) {
