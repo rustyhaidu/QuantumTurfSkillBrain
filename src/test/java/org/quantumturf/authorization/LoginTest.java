@@ -38,4 +38,13 @@ public class LoginTest extends BaseTest {
         loginPage.clickOnContinue();
         Assert.assertEquals(loginPage.getNotificationMessage(),"Username/Password incorrect!");
     }
+    @Test
+    public void pressingForgotPassword() throws InterruptedException {
+        loginPage.clickOnSignInButton();
+        loginPage.clickOnForgotPassword();
+        Thread.sleep(2000);
+        loginPage.fillEmailField("rustyhaidu@gmail.com");
+        loginPage.clickOnContinue();
+        Assert.assertEquals(loginPage.getNotificationMessage(),"An e-mail was sent with instruction to reset your password");
+    }
 }

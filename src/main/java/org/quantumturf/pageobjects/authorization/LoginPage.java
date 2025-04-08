@@ -12,6 +12,7 @@ public class LoginPage extends HomePage {
     private final By emailFieldSelector = By.xpath("//div[.='Email']/following-sibling::div/input");
     private final By passworldFieldSelector = By.xpath("//div[.='Password']/following-sibling::div/input");
     private final By continueButtonSelector = By.cssSelector(".green-button");
+    private final By forgotPassword= By.xpath("//div[.='Forgot Password?']");
     public String loginURL = "https://www.quantumturf.io/login";
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
@@ -49,4 +50,7 @@ public class LoginPage extends HomePage {
         performLogin("rustyhaidu@gmail.com", "SkillBrain06@");
     }
 
+    public void clickOnForgotPassword(){
+        identify(forgotPassword).click();
+    }
 }
