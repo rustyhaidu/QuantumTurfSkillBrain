@@ -28,7 +28,7 @@ public class ClientTest extends BaseTest {
         clientPage = new ClientPage(driver, wait);
         programPage = new ProgramPage(driver, wait);
         faker = new Faker();
-        propertyPage = new PropertyPage(driver,wait);
+        propertyPage = new PropertyPage(driver, wait);
     }
 
     @Test
@@ -150,8 +150,8 @@ public class ClientTest extends BaseTest {
         mainPage.clickOnPropertyTab();
         Thread.sleep(2000);
         clientPage.searchItem(propertiesZipCodeFaker);
-        Assert.assertTrue(propertyPage.isPropertyFound(propertiesAddressFaker));
-        propertyPage.clickOnPropertyFound(propertiesAddressFaker);
+        Assert.assertTrue(propertyPage.isPropertyFound(propertiesAddressFaker + ", " + propertiesZipCodeFaker));
+        propertyPage.clickOnPropertyFound(propertiesAddressFaker+ ", " + propertiesZipCodeFaker);
     }
 }
 

@@ -24,18 +24,18 @@ public class PropertyPage extends MainPage {
         List<WebElement> properties = identifyList(propertyCard);
         for (int i = 0; i < properties.size(); i++) {
             WebElement addressElement = properties.get(i).findElement(By.cssSelector(".text-small"));
-            if (!addressElement.getText().contains(address)) {
-                return false;
+            if (addressElement.getText().contains(address)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void clickOnPropertyFound(String address) {
         List<WebElement> properties = identifyList(propertyCard);
         for (int i = 0; i < properties.size(); i++) {
             WebElement addressElement = properties.get(i).findElement(By.cssSelector(".text-small"));
-            if (!addressElement.getText().contains(address)) {
+            if (addressElement.getText().contains(address)) {
                 properties.get(i).click();
             }
         }
