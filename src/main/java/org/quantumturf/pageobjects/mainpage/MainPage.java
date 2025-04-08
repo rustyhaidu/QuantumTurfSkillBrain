@@ -26,6 +26,7 @@ public class MainPage extends HomePage {
     //public final By itemsFoundListSelector = By.cssSelector("td[scope]");
     public final By itemsFoundListSelector = By.cssSelector("td[style*='50px']:nth-child(1)");
     public final By firstItemEditButton = By.cssSelector("tr:nth-child(1) img[src*='dots']");
+    public final By genericBackButton = By.cssSelector("img[src*= 'back']");
 
 
     public MainPage(WebDriver driver, WebDriverWait wait) {
@@ -96,5 +97,8 @@ public class MainPage extends HomePage {
 
     public void clickOnFirstThreeDotsButton() {
         identify(firstItemEditButton).click();
+    }
+    public void clickOnGenericBackButton(){
+        identify(genericBackButton).click();
     }
 }

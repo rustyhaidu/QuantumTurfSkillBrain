@@ -31,4 +31,13 @@ public class PropertyPage extends MainPage {
         return true;
     }
 
+    public void clickOnPropertyFound(String address) {
+        List<WebElement> properties = identifyList(propertyCard);
+        for (int i = 0; i < properties.size(); i++) {
+            WebElement addressElement = properties.get(i).findElement(By.cssSelector(".text-small"));
+            if (!addressElement.getText().contains(address)) {
+                properties.get(i).click();
+            }
+        }
+    }
 }

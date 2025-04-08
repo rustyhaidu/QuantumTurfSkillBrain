@@ -33,4 +33,5 @@ public class SchedulerTest extends BaseTest {
         schedulerPage.clickOnMapDownControl();
         Assert.assertTrue(devTools.isRequestFoundNonAtomic());
     }
+
 }
