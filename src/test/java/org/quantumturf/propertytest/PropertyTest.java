@@ -1,4 +1,4 @@
-package org.QuantumTurf.propertytest;
+package org.quantumturf.propertytest;
 
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;

@@ -154,14 +154,39 @@ public class ClientTest extends BaseTest {
         clientPage.searchItem(propertiesZipCodeFaker);
         Assert.assertTrue(propertyPage.isPropertyFound(propertiesAddressFaker + ", " + propertiesZipCodeFaker));
         Thread.sleep(1000);
-        propertyPage.clickOnPropertyFound(propertiesAddressFaker+ ", " + propertiesZipCodeFaker);
+        propertyPage.clickOnPropertyFound(propertiesAddressFaker + ", " + propertiesZipCodeFaker);
         propertyPage.clickOnProgram();
         propertyPage.clickOnSelectProgramDropDown();
         mainPage.searchAndSelectItem("Program123");
         propertyPage.clickOnGenerate();
-       // Assert.assertEquals(clientPage.getNotificationMessage(),"Zone successfully associated with program.");
+        // Assert.assertEquals(clientPage.getNotificationMessage(),"Zone successfully associated with program.");
         mainPage.clickOnSchedulerTab();
         mainPage.clickOnFirstThreeDotsButton();
+        propertyPage.clickOnCalendar();
+        propertyPage.selectCurrentDate();
+
+    }
+
+    @Test
+    public void editRounds() throws InterruptedException {
+        loginPage.performLogin();
+        mainPage.clickOnPropertyTab();
+        propertyPage.searchProperty("420 Orn Forks");
+        Thread.sleep(1000);
+        propertyPage.clickOnPropertyFound("420 Orn Forks");
+        propertyPage.clickOnProgram();
+        propertyPage.clickOnSecondThreeDotsButton();
+        Thread.sleep(1000);
+        propertyPage.clickOnCalendar();
+        propertyPage.selectCurrentDate();
+        propertyPage.clickOnSave();
+        Thread.sleep(1000);
+        propertyPage.clickOnGenericBackButton();
+        mainPage.clickOnSchedulerTab();
+        propertyPage.getClientName();
+        String nameClient = propertyPage.getClientName();
+        System.out.println("Numele clientului este :" +nameClient );
+        Assert.assertEquals(nameClient, "Kaycee Labadie's Property");
     }
 }
 

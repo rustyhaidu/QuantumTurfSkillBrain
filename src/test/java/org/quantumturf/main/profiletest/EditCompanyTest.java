@@ -3,7 +3,6 @@ package org.quantumturf.main.profiletest;
 import org.quantumturf.BaseTest;
 import org.quantumturf.pageobjects.authorization.LoginPage;
 import org.quantumturf.pageobjects.profilepage.EditCompanyPage;
-import org.quantumturf.pageobjects.profilepage.ProfilePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
