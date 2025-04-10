@@ -11,7 +11,6 @@ import java.util.List;
 
 public class InventoryPage extends MainPage {
 
-    private final By searchInput = By.xpath("//input[@placeholder='Search']");
     private final By productName = By.cssSelector("td[style='min-width: 50px;']");
     private final By productExpandImgs = By.cssSelector("td img");
     private final By productsExtraInfo = By.cssSelector("div.green-header");
@@ -20,9 +19,7 @@ public class InventoryPage extends MainPage {
         super(driver, wait);
     }
 
-    public void searchProduct(String product) {
-        identify(searchInput).sendKeys(product);
-    }
+
 
     public Boolean isProductPresent(String product) {
         List<WebElement> productList = identifyList(productName);

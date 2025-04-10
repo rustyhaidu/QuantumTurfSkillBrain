@@ -21,6 +21,7 @@ public class ProgramPage extends MainPage {
     public final By monthListSelector = By.cssSelector(".months");
     public final By buttonsDelete = By.cssSelector("img[src*='assets/img/trash.svg']");
 
+
     public ProgramPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }

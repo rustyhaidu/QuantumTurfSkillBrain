@@ -18,7 +18,6 @@ public class ClientPage extends MainPage {
     public final By citySelector = By.xpath("//div[.='City']/../following-sibling::div/input");
     public final By zipCode = By.cssSelector("input[placeholder= '000000']");
     public final By selectState = By.cssSelector(".dwn-toggle");
-    public final By stateSelector = By.cssSelector(".dwn-item");
     public final By searchState = By.xpath("//div[.='State']/../following-sibling::div/div/input");
     public final By saveForm = By.xpath("//div[.= 'Add Client']/../following-sibling::div/button");
     public final By addPropertiesButton = By.xpath("//div/div[.='Add Properties']");
@@ -33,6 +32,8 @@ public class ClientPage extends MainPage {
     public final By editClient = By.xpath("//div[.='Edit Client']/../following-sibling::div/button");
     public final By buttonBack = By.xpath("(//div[@class='drawer-content'])[2]//button[@class='very-light-grey-button btn btn-primary']");
     public final By nameField = By.cssSelector("input[placeholder='First Name Last Name']");
+
+
 
     public ClientPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -84,10 +85,6 @@ public class ClientPage extends MainPage {
         driver.findElement(selectState).click();
     }
 
-    public void inputSearchState(String state) {
-        identify(searchState).sendKeys(state);
-        identifyList(stateSelector).getFirst().click();
-    }
 
     public void clickOnSaveForm() {
         WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(saveForm));
@@ -150,6 +147,10 @@ public class ClientPage extends MainPage {
 
     public void insertName(String name) {
         identify(nameField).sendKeys(name);
+    }
+    public void searchAndSelectState(String item) {
+        identify(searchState).sendKeys(item);
+        selectFirstFoundItemFromDropDown();
     }
 }
 
