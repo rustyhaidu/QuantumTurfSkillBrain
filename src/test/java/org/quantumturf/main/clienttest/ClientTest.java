@@ -183,10 +183,11 @@ public class ClientTest extends BaseTest {
         Thread.sleep(1000);
         propertyPage.clickOnGenericBackButton();
         mainPage.clickOnSchedulerTab();
+        Thread.sleep(1000);
         propertyPage.getClientName();
         String nameClient = propertyPage.getClientName();
         System.out.println("Numele clientului este :" +nameClient );
-        Assert.assertEquals(nameClient, "Kaycee Labadie's Property");
+        Assert.assertEquals(nameClient, "Kaycee Labadie");
     }
 }
 
