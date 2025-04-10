@@ -45,7 +45,7 @@ public class ClientTest extends BaseTest {
         clientPage.inputCitySelector("Alabama");
         clientPage.inputZipCode("123456");
         clientPage.clickOnInputStateSelector();
-        clientPage.inputSearchState("NY");
+        clientPage.searchAndSelectState("NY");
         Thread.sleep(1000);
         clientPage.clickOnSaveForm();
         Assert.assertEquals(clientPage.getNotificationMessage(), "Lawn Customer already exists.");
@@ -62,7 +62,7 @@ public class ClientTest extends BaseTest {
         clientPage.typeInPropertiesCity("Bucharest");
         clientPage.typeInPropertiesZipCode("123456");
         clientPage.clickOnInputStateSelector();
-        clientPage.inputSearchState("NY");
+        clientPage.searchAndSelectState("NY");
         clientPage.clickOnPropertiesTurfType();
         programPage.clickOnWarmSeason();
         clientPage.typeInPropertiesArea("1000");
@@ -92,7 +92,7 @@ public class ClientTest extends BaseTest {
         clientPage.clickOnInputStateSelector();
         String state = faker.address().stateAbbr();
         System.out.println("Statul nostru este :" + state);
-        clientPage.inputSearchState(state);
+        clientPage.searchAndSelectState(state);
         clientPage.clickOnEditClient();
         Assert.assertEquals(clientPage.getNotificationMessage(), "Lawn Customer updated.");
     }
@@ -119,7 +119,7 @@ public class ClientTest extends BaseTest {
         clientPage.inputZipCode(zipCodeFaker);
         String stateSelectorFaker = faker.address().stateAbbr();
         clientPage.clickOnInputStateSelector();
-        clientPage.inputSearchState(stateSelectorFaker);
+        clientPage.searchAndSelectState(stateSelectorFaker);
         Thread.sleep(1000);
         clientPage.clickOnSaveForm();
         Assert.assertEquals(clientPage.getNotificationMessage(), "New Lawn Manager Customer registration process completed successfully");
@@ -135,11 +135,13 @@ public class ClientTest extends BaseTest {
         clientPage.typeInPropertiesZipCode(propertiesZipCodeFaker);
         clientPage.clickOnInputStateSelector();
         String stateFaker = faker.address().stateAbbr();
-        clientPage.inputSearchState(stateFaker);
+        System.out.println("Statul abreviat este: " + stateFaker);
+        clientPage.searchAndSelectState(stateFaker);
         clientPage.clickOnPropertiesTurfType();
         programPage.clickOnWarmSeason();
         String propertiesAreaFaker = faker.number().digits(2);
         clientPage.typeInPropertiesArea(propertiesAreaFaker);
+        Thread.sleep(1000);
         clientPage.clickOnAddPropertyButton();
         Thread.sleep(1000);
         Assert.assertEquals(clientPage.getNotificationMessage(), "Property added.");
@@ -151,7 +153,15 @@ public class ClientTest extends BaseTest {
         Thread.sleep(2000);
         clientPage.searchItem(propertiesZipCodeFaker);
         Assert.assertTrue(propertyPage.isPropertyFound(propertiesAddressFaker + ", " + propertiesZipCodeFaker));
+        Thread.sleep(1000);
         propertyPage.clickOnPropertyFound(propertiesAddressFaker+ ", " + propertiesZipCodeFaker);
+        propertyPage.clickOnProgram();
+        propertyPage.clickOnSelectProgramDropDown();
+        mainPage.searchAndSelectItem("Program123");
+        propertyPage.clickOnGenerate();
+       // Assert.assertEquals(clientPage.getNotificationMessage(),"Zone successfully associated with program.");
+        mainPage.clickOnSchedulerTab();
+        mainPage.clickOnFirstThreeDotsButton();
     }
 }
 

@@ -25,7 +25,7 @@ public class FilterProductTest extends BaseTest {
     public void filterProductTest() {
         loginPage.performLogin();
         mainPage.clickOnInventoryTab();
-        inventoryPage.searchProduct("Apple");
+        inventoryPage.searchItemFromDropDown("Apple");
         Assert.assertTrue(inventoryPage.isProductPresent("Apple"));
 
     }

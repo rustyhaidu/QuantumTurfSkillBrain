@@ -21,10 +21,11 @@ public class PropertyTest extends BaseTest {
     }
 
     @Test
-    public void filterPropertyByAddress(){
+    public void filterPropertyByAddress() throws InterruptedException {
         loginPage.performLogin();
         mainPage.clickOnPropertyTab();
         propertyPage.searchProperty("Adresa12");
+        Thread.sleep(1000);
         Assert.assertTrue(propertyPage.isPropertyFound("Adresa12"));
     }
 }
