@@ -24,6 +24,7 @@ public class PropertyPage extends MainPage {
     private final By saveButton = By.xpath("//button[.='Save']");
     private final By clientName = By.cssSelector("div.text-larger");
 
+
     public PropertyPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -51,6 +52,7 @@ public class PropertyPage extends MainPage {
             WebElement addressElement = properties.get(i).findElement(By.cssSelector(".text-small"));
             if (addressElement.getText().contains(address)) {
                 properties.get(i).click();
+                break;
             }
         }
     }
