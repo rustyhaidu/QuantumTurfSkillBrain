@@ -30,23 +30,60 @@ public class ClientPage extends MainPage {
     public final By propertiesAddress = By.xpath("//div[.='Properties']/../following-sibling::div//td[contains(text(),',')]");
     public final By editButton = By.cssSelector("div.drawer.open .green-button-outlined");
     public final By editClient = By.xpath("//div[.='Edit Client']/../following-sibling::div/button");
+    public final By name = By.xpath("//div[.='Name']/../following-sibling::div/input");
+    private final By invalidName = By.xpath("//div[.='Name']/../following-sibling::div[contains(@class,'text-red')]");
+    private final By invalidPhoneNumber = By.xpath("//div[.='Phone Number']/../following-sibling::div[contains(@class,'text-red')]");
     public final By buttonBack = By.xpath("(//div[@class='drawer-content'])[2]//button[@class='very-light-grey-button btn btn-primary']");
     public final By nameField = By.cssSelector("input[placeholder='First Name Last Name']");
-
-
+    public final By invalidAdress = By.xpath("//div[.='Address']/../following-sibling::div[contains(@class,'text-red')]");
+    public final By invalidCitySelector = By.xpath("//div[.='City']/../following-sibling::div[contains(@class,'text-red')]");
+    public final By invalidZipCode = By.xpath("//div[.='Zip Code']/../following-sibling::div[contains(@class,'text-red')]");
 
     public ClientPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
+    }
+
+    public String getFirstItemFound() {
+        return identifyList(itemSelector).getFirst().getText();
+    }
+
+    public String getInvalidZipCodeMessage() {
+        return identify(invalidZipCode).getText();
+    }
+
+    public String getInvalidCityMessage() {
+        return identify(invalidCitySelector).getText();
+    }
+
+    public String getInvalidPhoneNumberMessage() {
+        return identify(invalidPhoneNumber).getText();
+
+    }
+
+    public String getInvalidAdressMessage() {
+        return identify(invalidAdress).getText();
     }
 
     public void clickOnClientButton() {
         driver.findElement(addClientButton).click();
     }
 
+
     public void inputFirstName(String firstName) {
         WebElement name = identify(this.firstName);
         name.clear();
         name.sendKeys(firstName);
+    }
+
+    public String getInvalidNameMessage() {
+        return identify(invalidName).getText();
+
+    }
+
+    public void inputName(String name) {
+        WebElement nameElement = identify(this.name);
+        nameElement.clear();
+        nameElement.sendKeys(name);
     }
 
     public void inputLastName(String lastName) {
@@ -69,10 +106,10 @@ public class ClientPage extends MainPage {
         address.sendKeys(addressInput);
     }
 
-    public void inputCitySelector(String citySelector) {
-        WebElement city = identify(this.citySelector);
-        city.clear();
-        city.sendKeys(citySelector);
+    public void inputCity(String city) {
+        WebElement cityElement = identify(this.citySelector);
+        cityElement.clear();
+        cityElement.sendKeys(city);
     }
 
     public void inputZipCode(String zipCode) {
@@ -81,7 +118,7 @@ public class ClientPage extends MainPage {
         zipCodeElement.sendKeys(zipCode);
     }
 
-    public void clickOnInputStateSelector() {
+    public void clickOnInputState() {
         driver.findElement(selectState).click();
     }
 
@@ -148,6 +185,7 @@ public class ClientPage extends MainPage {
     public void insertName(String name) {
         identify(nameField).sendKeys(name);
     }
+
     public void searchAndSelectState(String item) {
         identify(searchState).sendKeys(item);
         selectFirstFoundItemFromDropDown();

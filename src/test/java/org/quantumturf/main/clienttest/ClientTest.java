@@ -42,9 +42,9 @@ public class ClientTest extends BaseTest {
         clientPage.inputEmail("mariapopecu24@yahoo.com");
         clientPage.inputPhoneNumber("0785432149");
         clientPage.inputAddress("Strada Florilor");
-        clientPage.inputCitySelector("Alabama");
+        clientPage.inputCity("Alabama");
         clientPage.inputZipCode("123456");
-        clientPage.clickOnInputStateSelector();
+        clientPage.clickOnInputState();
         clientPage.searchAndSelectState("NY");
         Thread.sleep(1000);
         clientPage.clickOnSaveForm();
@@ -61,7 +61,7 @@ public class ClientTest extends BaseTest {
         clientPage.typeInPropertiesAddress("Adresa12");
         clientPage.typeInPropertiesCity("Bucharest");
         clientPage.typeInPropertiesZipCode("123456");
-        clientPage.clickOnInputStateSelector();
+        clientPage.clickOnInputState();
         clientPage.searchAndSelectState("NY");
         clientPage.clickOnPropertiesTurfType();
         programPage.clickOnWarmSeason();
@@ -86,10 +86,10 @@ public class ClientTest extends BaseTest {
         String street = faker.address().streetAddress();
         clientPage.inputAddress(street);
         String city = faker.address().city();
-        clientPage.inputCitySelector(city);
+        clientPage.inputCity(city);
         String zipCode = faker.address().zipCode();
         clientPage.inputZipCode(zipCode);
-        clientPage.clickOnInputStateSelector();
+        clientPage.clickOnInputState();
         String state = faker.address().stateAbbr();
         System.out.println("Statul nostru este :" + state);
         clientPage.searchAndSelectState(state);
@@ -114,11 +114,11 @@ public class ClientTest extends BaseTest {
         String addressStreetFaker = faker.address().streetAddress();
         clientPage.inputAddress(addressStreetFaker);
         String cityFaker = faker.address().city();
-        clientPage.inputCitySelector(cityFaker);
+        clientPage.inputCity(cityFaker);
         String zipCodeFaker = faker.address().zipCode();
         clientPage.inputZipCode(zipCodeFaker);
         String stateSelectorFaker = faker.address().stateAbbr();
-        clientPage.clickOnInputStateSelector();
+        clientPage.clickOnInputState();
         clientPage.searchAndSelectState(stateSelectorFaker);
         Thread.sleep(1000);
         clientPage.clickOnSaveForm();
@@ -133,7 +133,7 @@ public class ClientTest extends BaseTest {
         clientPage.typeInPropertiesCity(propertiesCityFaker);
         String propertiesZipCodeFaker = faker.address().zipCode();
         clientPage.typeInPropertiesZipCode(propertiesZipCodeFaker);
-        clientPage.clickOnInputStateSelector();
+        clientPage.clickOnInputState();
         String stateFaker = faker.address().stateAbbr();
         System.out.println("Statul abreviat este: " + stateFaker);
         clientPage.searchAndSelectState(stateFaker);
@@ -186,8 +186,30 @@ public class ClientTest extends BaseTest {
         Thread.sleep(1000);
         propertyPage.getClientName();
         String nameClient = propertyPage.getClientName();
-        System.out.println("Numele clientului este :" +nameClient );
+        System.out.println("Numele clientului este :" + nameClient);
         Assert.assertEquals(nameClient, "Kaycee Labadie");
+    }
+
+    @Test
+    public void editClientTest() throws InterruptedException {
+        loginPage.performLogin();
+        mainPage.clickOnClientTab();
+        mainPage.clickOnFirstThreeDotsButton();
+        Thread.sleep(1000);
+        clientPage.clickOnEdit();
+        clientPage.inputName("123");
+        Assert.assertEquals(clientPage.getInvalidNameMessage(), "Invalid name.");
+        clientPage.inputPhoneNumber("@");
+        Assert.assertEquals(clientPage.getInvalidPhoneNumberMessage(), "Invalid phone number.");
+        clientPage.inputAddress("!!");
+        Assert.assertEquals(clientPage.getInvalidAdressMessage(), "Invalid address.");
+        clientPage.inputCity("@");
+        Assert.assertEquals(clientPage.getInvalidCityMessage(), "Invalid city.");
+        clientPage.inputZipCode("@");
+        Assert.assertEquals(clientPage.getInvalidZipCodeMessage(), "Invalid zip code.");
+        clientPage.clickOnInputState();
+        clientPage.searchAndSelectState("aaa");
+        Assert.assertEquals(clientPage.getFirstItemFound(),"No results found");
     }
 }
 
