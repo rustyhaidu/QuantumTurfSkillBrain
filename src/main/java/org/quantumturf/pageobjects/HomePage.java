@@ -12,7 +12,7 @@ public class HomePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    private final By registerButtonSelector = By.cssSelector(".header a[href*='signup']");
+    final By registerButtonSelector = By.cssSelector(".header a[href*='signup']");
     private final By signInButtonSelector = By.cssSelector(".header a[href*='login']");
     public final By notificationMessage = By.cssSelector(".notification span");
 
