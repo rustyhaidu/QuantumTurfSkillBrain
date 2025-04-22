@@ -1,9 +1,12 @@
 package org.quantumturf.playground.vehicle;
 
+import java.util.Objects;
+
 public class Masina extends Vehicle {
     private String nume;
     private int nrUsi;
     private int treaptaViteza;
+    private String serieSasiu;
 
     public static boolean readyToDrive = true;
 
@@ -11,8 +14,36 @@ public class Masina extends Vehicle {
 
     }
 
-    public Masina(int a){
+    public Masina(String serieSasiu) {
+        this.serieSasiu = serieSasiu;
+    }
+
+    public Masina(int a) {
         this.nrUsi = a;
+    }
+
+    public int getTreaptaViteza() {
+        return treaptaViteza;
+    }
+
+    public void setTreaptaViteza(int treaptaViteza) {
+        this.treaptaViteza = treaptaViteza;
+    }
+
+    public static boolean isReadyToDrive() {
+        return readyToDrive;
+    }
+
+    public static void setReadyToDrive(boolean readyToDrive) {
+        Masina.readyToDrive = readyToDrive;
+    }
+
+    public String getSerieSasiu() {
+        return serieSasiu;
+    }
+
+    public void setSerieSasiu(String serieSasiu) {
+        this.serieSasiu = serieSasiu;
     }
 
     public void porneste() {
@@ -62,5 +93,18 @@ public class Masina extends Vehicle {
 
     public class InnerClass {
         public static int nr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Masina masina = (Masina) o;
+        return Objects.equals(serieSasiu, masina.serieSasiu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(serieSasiu);
     }
 }
