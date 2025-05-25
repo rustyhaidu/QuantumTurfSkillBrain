@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SocialButtonsTest extends BaseTest {
+public class SocialButtonsTest extends org.quantumturf.BaseTest {
     SocialPage socialPage;
 
     @BeforeMethod

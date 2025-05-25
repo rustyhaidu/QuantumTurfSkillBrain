@@ -7,7 +7,7 @@ import org.quantumturf.utils.Constants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CitireParagraf extends BaseTest{
+public class CitireParagraf extends org.quantumturf.BaseTest {
 
     @Test
     public void extragereparagraf() {
